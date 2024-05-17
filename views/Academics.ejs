@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+   <%- include('./partials/head.ejs') %>
+
+   <body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="aca-wrap">
+      <div class="aca-first">
+         <h1>Academics</h1>
+         <p>  We dedicated to guiding students in unlocking their personal and educational capabilities, fostering their role as esteemed participants in both family and community spheres.</p>
+      </div>
+    </div>
+
+    <div class="aca-text">
+      <H1>We Teach The Way The Child Can Learn</H1>
+      <p>We aspire to cultivate enduring learners among our students,<br> fostering a sense of belonging while encouraging them<br> to apply their skills and knowledge,<br> empowering them to make informed choices and take responsibility for their decisions.</p>
+
+    </div>
+
+    <div class="aca-shadow">
+
+      <h1>Our program</h1>
+
+      <p>The school consist units of classes of Intervention 1 through Adolescent unit.<br> Our priority is to nurture 
+
+        and stimulate every child’s interest<br> to become self reliant after going through our vocatonal training</p>
+
+        <img class="aca-pix" src="/img/b39.jpg">
+
+
+    </div>
+
+    <div class="aca-shadow2">
+      <h1>Classroom settings</h1>
+      <p>The pupils are classified according to the nature of their impairment <br>and also the level of their 
+
+        intelligence quo"ent (I.Q).<br> we have the speech impaired classes,<br> the intellectually impaired 
+        
+        classes and also skill acquisi"on classes.
+        </p>
+
+
+    </div>
+
+    <div class="aca-shadow3">
+      <h1>Teach Program</h1>
+      <p>Pupils have their own individualized education programme (IEP) hese classes are as follows:<br>
+
+        1. Early Intervention I<br>
+        
+        2. Early Intervention II<br>
+        
+        3. Early Intervention III<br>
+        
+        4. Adolescent Unit</p>
+        <img class="aca-pix2" src="/img/b33.jpg">
+
+    </div>
+
+    <div class="aca-shadow4">
+      <h1>Benefits</h1>
+      <p>These programmes enables us to monitor their progress and also ensures continuous <br>
+
+        follow-up. Their progress also promote them to the next intervention classes after which <br>
+        
+        they can now be integrated into a mainstream school settings.</p>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+
+    <script>
+      function toggleMobileMenu(menu) {
+var isOpen = menu.classList.toggle('open');
+if (!isOpen) {
+    closeDropdowns(); // Close dropdowns when menu is closed
+}
+}
+
+// Function to toggle dropdown
+function toggleDropdown(event) {
+event.stopPropagation(); // Prevent propagation of the click event
+var parentListItem = event.target.parentElement;
+parentListItem.classList.toggle('open');
+}
+
+// Function to close all dropdowns
+function closeDropdowns() {
+var dropdowns = document.querySelectorAll('.has-dropdown');
+dropdowns.forEach(function(dropdown) {
+    dropdown.classList.remove('open');
+});
+}
+
+// Close dropdowns when clicking outside of them
+document.addEventListener('click', function(event) {
+var dropdowns = document.querySelectorAll('.has-dropdown');
+dropdowns.forEach(function(dropdown) {
+    if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('open');
+    }
+});
+});
+
+// Close dropdowns when the window is resized (for responsiveness)
+window.addEventListener('resize', function() {
+closeDropdowns();
+});
+
+// Close dropdowns when the mobile menu is closed
+document.getElementById('ham-icon').addEventListener('click', function(event) {
+if (!event.currentTarget.classList.contains('open')) {
+    closeDropdowns();
+}
+});
+</script>
+   </body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs')  %>
+
+
+<body>
+
+    <%- include('./partials/nav.ejs') %>
+
+     <div class="aut-contain">
+     <div class="aut-wrap">
+    <div class="aut-first">
+
+        <h1>Autism Day</h1>
+
+        <p>Welcome to CDOSSC  Autism Acceptance Day celebration! </p>
+
+    </div>
+
+
+    </div>
+
+    
+    <div class="aut-2nd">
+
+        <h1>Autism Day at CDOSSC</h1>
+
+        <P>This special day is dedicated to raising awareness, fostering understanding, and promoting acceptance of individuals with 
+           autism spectrum disorder (ASD). <br>At CDOSSC, we believe in creating an inclusive <br>environment
+           that celebrates the unique strengths and talents of every student. Join us as we embark on a <br>
+        journey of acceptance, appreciation, and advocacy for the autism community.
+        </P>
+
+    </div>
+
+    <div class="aut-grid">
+
+        <div class="aut-item">
+            <img class="aut-pix" src="/img/a11.jpg">
+
+        </div>
+
+        <div class="aut-item">
+            <h1>Introduction</h1>
+
+            <p>Welcome to CDOSSC  Autism Acceptance Day celebration! This special day is dedicated<br> to 
+               raising awareness, fostering understanding, and promoting acceptance of individuals<br> with 
+               autism spectrum disorder (ASD). At CDOSSC, we believe in creating an inclusive<br> environment 
+               that celebrates the unique strengths and talents of every student. Join us as we embark on a 
+               journey of acceptance, appreciation, and advocacy for the autism community.
+            </p>
+
+        </div>
+
+        <div class="aut-item">
+            <h1>Understanding Autism Spectrum Disorder</h1>
+
+            <p>   The autism spectrum is a broad range of neurodevelopmental conditions that affect individuals in varying ways. At CDOSSC, we recognize that autism is not a one-size-fits-all diagnosis. Instead, it is a spectrum, encompassing a wide array of strengths, challenges, and characteristics that make each person exceptional.
+
+        </div>
+
+        <div class="aut-item">
+            <img class="aut-pix" src="/img/a2.jpg">
+        </div>
+
+        <div class="aut-item">
+
+            <img class="aut-pix" src="img/autn.jpg">
+
+        </div>
+
+        <div class="aut-item">
+            <h1>Celebrating Neurodiversity</h1>
+
+            <p>Neurodiversity is at the core of our philosophy. We believe in celebrating the unique qualities and abilities of each student, valuing the diverse ways in which they experience the world. Our commitment to neurodiversity extends beyond acceptance; it is about creating an environment where differences are not only acknowledged but also celebrated.</p>
+
+        </div>
+
+       
+
+    </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+    <script>
+        function toggleMobileMenu(menu) {
+  var isOpen = menu.classList.toggle('open');
+  if (!isOpen) {
+      closeDropdowns(); // Close dropdowns when menu is closed
+  }
+}
+
+// Function to toggle dropdown
+function toggleDropdown(event) {
+  event.stopPropagation(); // Prevent propagation of the click event
+  var parentListItem = event.target.parentElement;
+  parentListItem.classList.toggle('open');
+}
+
+// Function to close all dropdowns
+function closeDropdowns() {
+  var dropdowns = document.querySelectorAll('.has-dropdown');
+  dropdowns.forEach(function(dropdown) {
+      dropdown.classList.remove('open');
+  });
+}
+
+// Close dropdowns when clicking outside of them
+document.addEventListener('click', function(event) {
+  var dropdowns = document.querySelectorAll('.has-dropdown');
+  dropdowns.forEach(function(dropdown) {
+      if (!dropdown.contains(event.target)) {
+          dropdown.classList.remove('open');
+      }
+  });
+});
+
+// Close dropdowns when the window is resized (for responsiveness)
+window.addEventListener('resize', function() {
+  closeDropdowns();
+});
+
+// Close dropdowns when the mobile menu is closed
+document.getElementById('ham-icon').addEventListener('click', function(event) {
+  if (!event.currentTarget.classList.contains('open')) {
+      closeDropdowns();
+  }
+});
+</script>
+    </body>
+
+
+</html>

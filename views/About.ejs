@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs')  %>
+
+    <body>
+
+        <%- include('./partials/nav.ejs') %>
+       <div class="wrapper">
+        <div class="img-wrap">
+       <div class="container">
+           
+        
+        <div class="abt-right">
+
+                <h1>ABOUT CDOSSC<BR>MOTTO: DISABILITY IS NOT INABILITY</h1>
+
+            </div>
+
+        </div>
+
+            <div class="abt-next">  
+
+                <h1>Welcome to CDOSSC</h1>
+
+                <p>CDOSSC is a private school for children living with neurologial disorder. it is located in a serene enviroment with adequate security, qualified man power, specialist, therapists and skilled care givers.
+                    CDOSSC helps chidren with needs that cant be met in a regular classroom, learning environments and teaching approaches
+                Curriculum are well adapted to support and help them.</p>
+
+        
+
+            </div>
+
+        </div>
+
+
+
+           <div class="abt-grid">
+
+            <div class="grid-item">
+                <h2>FOUNDATION</h2>
+
+                <p>CDOSSC is a private school for children living with neurological disorder. It is located in a serene 
+
+                    environment with adequate security, qualified manpower, specialist, therapists and skilled care-givers. 
+                    
+                    The school started operation on 6th
+                    
+                    October 2013 and commissioned by His Excellency, Governor of 
+                    
+                    Delta State, Senator Ifeanyi Okowa on the 25th
+                    
+                    February 2016.</p> 
+
+
+
+            </div>
+
+           <div class="grid-item"> 
+
+                 <img class="grid-pix" src="img/culture.jpg" alt="left">
+
+            </div>
+
+        
+
+       
+        <div class="grid-item">
+            <img class="grid-pix" src="img/b41.jpg">
+
+        </div>
+
+        <div class="grid-item">
+
+            <h2>Our Committment</h2>
+
+            <P> CDOSSC was commisioned by Dr. Ifeanyi Arthur Okowa then Governor of the Delta State<br>
+                it and its well recognized by the governemnt. We engage students in many educational and recreational activity. <br>This helps them fit in society with as much knlowledge and skills as possible</P>
+
+        </div>
+
+
+        <div class="grid-item">
+
+            <h2>PROFESSIONAL AFFILITIONS</h2>
+
+           
+
+            <p>The educational institution is dedicated to creating a supportive and secure setting specifically designed for students attending special schools. <br>
+                Within this environment, children and young adults can forge social connections while benefitting from individualized attention, facilitated by low student-to-teacher ratios.<br>
+
+                CDOSSC is committed to maximizing the growth of each student's communication and language, social, academic,<br> and life/independence skills, recognizing the unique needs of those attending special schools.
+                
+                Our overarching goal is to foster independence among students with diverse abilities,<br>
+                 enabling them to actively participate and thrive within their communities, all within the specialized framework of special education.</p>
+
+        </div>
+
+        <div class="grid-item">
+
+            <img class="grid-pix" src="img/b20.jpg">
+
+        </div>
+        
+              
+           </div>
+       </div>
+
+       <%- include('./partials/footer.ejs') %>
+        
+
+           
+       <script>
+        function toggleMobileMenu(menu) {
+  var isOpen = menu.classList.toggle('open');
+  if (!isOpen) {
+      closeDropdowns(); // Close dropdowns when menu is closed
+  }
+}
+
+// Function to toggle dropdown
+function toggleDropdown(event) {
+  event.stopPropagation(); // Prevent propagation of the click event
+  var parentListItem = event.target.parentElement;
+  parentListItem.classList.toggle('open');
+}
+
+// Function to close all dropdowns
+function closeDropdowns() {
+  var dropdowns = document.querySelectorAll('.has-dropdown');
+  dropdowns.forEach(function(dropdown) {
+      dropdown.classList.remove('open');
+  });
+}
+
+// Close dropdowns when clicking outside of them
+document.addEventListener('click', function(event) {
+  var dropdowns = document.querySelectorAll('.has-dropdown');
+  dropdowns.forEach(function(dropdown) {
+      if (!dropdown.contains(event.target)) {
+          dropdown.classList.remove('open');
+      }
+  });
+});
+
+// Close dropdowns when the window is resized (for responsiveness)
+window.addEventListener('resize', function() {
+  closeDropdowns();
+});
+
+// Close dropdowns when the mobile menu is closed
+document.getElementById('ham-icon').addEventListener('click', function(event) {
+  if (!event.currentTarget.classList.contains('open')) {
+      closeDropdowns();
+  }
+});
+</script>
+    </body>
+
+
+</html>
