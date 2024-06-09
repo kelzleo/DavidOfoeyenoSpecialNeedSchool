@@ -15,15 +15,16 @@
             <h1>Connect With Us</h1>
 
             <p>
-                Contact Address: Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt <br>
-                Drive Dsc Township Orhuwhorun, Behind Challenge<br>
-                ACademy, Near Warri, Delta STate<br>
+                Contact Address: Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt 
+                Drive Dsc Township Orhuwhorun, Behind Challenge
+                ACademy, Near Warri, Delta STate
                 Nigeria
             </p>
 
             <p>
-                Email: ofoeyenoautismschool@yahoo.com<br>
-                Phone: 08054707148, 08162144476
+                <p>Email: <a href="mailto:ofoeyenoautismschool@yahoo.com">ofoeyenoautismschool@yahoo.com</a></p>
+                <p><a href="tel:+2348162144476">+234 816 214 4476</a>
+                <a href="tel:+2348054707148">+234 805 470 7148</a></p>
             </p>
 
         </div>
@@ -76,38 +77,27 @@ document.getElementById('ham-icon').addEventListener('click', function(event) {
   }
 });
 
-          // Select all elements with the class 'carousel-slide'
-const slides = document.querySelectorAll('.carousel-slide');
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    let currentSlide = 0;
 
-// Initialize a variable to keep track of the current slide index
-let currentSlide = 0;
+    function showSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
 
-// Define a function to show a specific slide
-function showSlide(n) {
-// Hide the current slide by setting its display property to 'none'
-slides[currentSlide].style.display = 'none';
+    function autoAdvance() {
+        showSlide(currentSlide + 1);
+    }
 
-// Calculate the index of the next slide, ensuring it loops back to the beginning or end if necessary
-currentSlide = (n + slides.length) % slides.length;
+    // Show the initial slide
+    showSlide(currentSlide);
 
-// Show the next slide by setting its display property to 'block'
-slides[currentSlide].style.display = 'block';
-}
-
-// Add an event listener to the previous button
-document.getElementById('prevBtn').addEventListener('click', () => {
-// When the previous button is clicked, call the showSlide function with the index of the previous slide
-showSlide(currentSlide - 1);
+    // Auto-advance slides every 3 seconds
+    setInterval(autoAdvance, 3000); // Change the interval as needed
 });
 
-// Add an event listener to the next button
-document.getElementById('nextBtn').addEventListener('click', () => {
-// When the next button is clicked, call the showSlide function with the index of the next slide
-showSlide(currentSlide + 1);
-});
-
-// Show the initial slide when the page loads
-showSlide(currentSlide);
       </script>
     </body>
 </html>

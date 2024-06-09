@@ -1,10 +1,28 @@
+
+
+.roboto-slab p {
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: light;
+  font-style: normal;
+}
+
+
 * {
   margin: 0;
   padding: 0;
 }
 
 body {}
-
+p{
+  font-size: 11pt !important;
+  line-height: 30px;
+  margin: 15px 0;
+  color: gray !important;
+  font-weight: 400;
+  font-family: 'Roboto Slab', serif !important;
+  text-align: justify !important;
+}
 
 
 .navbar {}
@@ -767,15 +785,18 @@ body {}
   width: 100%;
 }
 
+
 .carousel {
   position: relative;
   overflow: hidden;
   width: 100%;
   z-index: 1;
+  transition: left 0.5s ease-in-out; /* Add transition property */
 }
 
 .carousel-slide {
   display: none;
+  
 }
 
 .carousel-slide img {
@@ -803,35 +824,57 @@ body {}
   right: 10px;
 }
 
-@media only screen and (min-width:1000px) {
-  .kelz-pix {
-    width: 100%;
-    height: 100vh;
-  }
+.carousel-slide.active {
+  display: block;
+}
 
-  .kelz-wel h1 {
-    padding: 30px;
-  }
+/* Define styles for desktop view */
+/* Mobile-specific styles (without media query) */
+.kelz-pix {
+  width: 100%;
+  height: 100vh;
+}
 
-  .kelz-wel p {
-    padding: 10px 200px;
 
-  }
 
-  .kelz-2 {
+.kelz-2 {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
 
-    width: 100%;
-  }
+.kelz-2.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
 
+/* Desktop-specific styles */
+@media (min-width: 1000px) {
   .kelz-images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 0;
   }
 
   .kelz-1 {
-    padding: 10px;
+      margin-bottom: 0; /* Reset margin for desktop */
   }
+}
+
+
+@media only screen and (min-width:1000px) {
+  
+
+.kelz-wel h1 {
+    padding: 30px;
+}
+
+.kelz-wel p {
+    padding: 10px 200px;
+}
+
+
 
   .carousel-slide img {
     width: 100%;
@@ -1022,29 +1065,41 @@ ul li:hover {
   padding: 10px;
 }
 
+  /* Basic styling for clickable links */
+  a[href^="tel:"], a[href^="mailto:"] {
+    color: blue;
+    text-decoration: underline;
+    margin-right: 20px; /* Add some space between the phone numbers */
+}
+
+/* Add hover effect */
+a[href^="tel:"], a[href^="mailto:"]:hover {
+    color: darkblue;
+}
+
+.con1-img{
+  width: 100%;
+}
+
 
 
 @media only screen and (min-width:1000px) {
 
-  .contact-1st{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-        padding: 50px 200px;
-  }
-  .img-con{
-    width: 400px;
-    height: 400px;
-    
-  }
 }
 
 .footer{
   background-color: darkred;
   padding: 20px;
-    text-align: center;
+    text-align: center !important;
 
-  color: white;
 }
+
+.footer p{
+  color: white !important;
+  font-family: roboto;
+  text-align: center !important;
+}
+
 
 
  

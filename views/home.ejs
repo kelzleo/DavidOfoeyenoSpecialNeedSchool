@@ -93,38 +93,53 @@ document.getElementById('ham-icon').addEventListener('click', function(event) {
     }
 });
 
-            // Select all elements with the class 'carousel-slide'
-const slides = document.querySelectorAll('.carousel-slide');
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    let currentSlide = 0;
 
-// Initialize a variable to keep track of the current slide index
-let currentSlide = 0;
+    function showSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
 
-// Define a function to show a specific slide
-function showSlide(n) {
-  // Hide the current slide by setting its display property to 'none'
-  slides[currentSlide].style.display = 'none';
-  
-  // Calculate the index of the next slide, ensuring it loops back to the beginning or end if necessary
-  currentSlide = (n + slides.length) % slides.length;
-  
-  // Show the next slide by setting its display property to 'block'
-  slides[currentSlide].style.display = 'block';
-}
+    function autoAdvance() {
+        showSlide(currentSlide + 1);
+    }
 
-// Add an event listener to the previous button
-document.getElementById('prevBtn').addEventListener('click', () => {
-  // When the previous button is clicked, call the showSlide function with the index of the previous slide
-  showSlide(currentSlide - 1);
+    // Show the initial slide
+    showSlide(currentSlide);
+
+    // Auto-advance slides every 3 seconds
+    setInterval(autoAdvance, 3000); // Change the interval as needed
 });
 
-// Add an event listener to the next button
-document.getElementById('nextBtn').addEventListener('click', () => {
-  // When the next button is clicked, call the showSlide function with the index of the next slide
-  showSlide(currentSlide + 1);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.kelz-2');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            } else {
+                entry.target.classList.remove('in-view');
+            }
+        });
+    }, observerOptions);
+
+    images.forEach(image => {
+        observer.observe(image);
+    });
 });
 
-// Show the initial slide when the page loads
-showSlide(currentSlide);
+
         </script>
     </body>
 

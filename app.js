@@ -41,3 +41,7 @@ app.get('/staffs', (req, res) => {
 app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact' })
 })
+
+app.get('/contacts', (req, res) => {
+    res.render('contacts', { title: 'contacts'})
+})
