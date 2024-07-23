@@ -83,8 +83,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showSlide(n) {
         slides[currentSlide].classList.remove('active');
+        slides[currentSlide].classList.add('prev');
+        
         currentSlide = (n + slides.length) % slides.length;
-        slides[currentSlide].classList.add('active');
+        
+        slides[currentSlide].classList.remove('prev');
+        slides[currentSlide].classList.add('next');
+        
+        setTimeout(() => {
+            slides[currentSlide].classList.remove('next');
+            slides[currentSlide].classList.add('active');
+        }, 50); // Slight delay to ensure transition takes effect
     }
 
     function autoAdvance() {
@@ -92,11 +101,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show the initial slide
-    showSlide(currentSlide);
+    slides[currentSlide].classList.add('active');
 
     // Auto-advance slides every 3 seconds
     setInterval(autoAdvance, 3000); // Change the interval as needed
+
+    // Removed event listeners for manual controls
 });
+
+
+
 
       </script>
     </body>
