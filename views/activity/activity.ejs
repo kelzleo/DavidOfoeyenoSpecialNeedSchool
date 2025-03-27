@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head.ejs') %>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+    
+    <div class="disco-first">
+      <%- include('../partials/carousel.ejs') %>
+    </div>
+  
+    <div class="disco-2nd">
+      <div class="wave-container">
+        <svg class="wave wave-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path fill="#6bc6ff" d="M0,256L80,240C160,224,320,192,480,170.7C640,149,800,139,960,144C1120,149,1280,171,1360,181.3L1440,192L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+        </svg>
+      </div>
+      
+      <h1>Overview</h1>
+      <p>
+        At Comerade David Ofoeyeno School for Special Children, we believe in creating a nurturing, inclusive, and stimulating environment where children with special needs can develop their potential to the fullest. Our activities are carefully designed to provide structured learning, therapeutic engagement, and recreational opportunities that foster growth in cognitive, emotional, social, and physical aspects. These activities not only encourage skill development but also promote confidence, creativity, and self-expression.
+      </p>
+      
+      <div class="wave-container">
+        <svg class="wave wave-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path fill="#6bc6ff" d="M0,256L80,240C160,224,320,192,480,170.7C640,149,800,139,960,144C1120,149,1280,171,1360,181.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        </svg>
+      </div>
+    </div>
+  
+    <div class="container">
+      <% if (user && user.isAdmin) { %>
+        <a href="/activity/new" class="btn">New Activity</a>
+      <% } %>
+  
+      <div class="posts-grid">
+        <% posts.forEach(post => { %>
+          <div class="card">
+            <!-- Clickable area (card content) -->
+            <a href="/activity/<%= post.slug %>" class="card-link">
+              <div class="card-body">
+                <h4 class="class-title"><%= post.title %></h4>
+                <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
+                
+                <% if (post.imagePath) { %>
+                  <div class="image-container">
+                    <img 
+                      src="/activity/image/<%= post.imagePath %>" 
+                      alt="<%= post.title %>"
+                      class="article-image"
+                      onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
+                    >
+                  </div>
+                <% } %>
+                
+                <div class="class-text">
+                  <%= post.description %>
+                </div>
+              </div>
+            </a>
+  
+            <!-- Admin controls outside of the clickable area -->
+            <% if (user && user.isAdmin) { %>
+              <div class="btn-flex">
+                <a href="/activity/edit/<%= post.id %>" class="Edit">
+                  Edit
+                </a>
+                <form 
+                  action="/activity/<%= post.id %>?_method=DELETE" 
+                  method="POST"
+                  onsubmit="return confirm('Are you sure you want to delete this post?');"
+                >
+                  <button type="submit" class="btn-danger">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+      
+    <%- include('../partials/footer.ejs') %>
+  
+    <script>
+      function toggleMobileMenu(menu) {
+        var isOpen = menu.classList.toggle('open');
+        if (!isOpen) {
+            closeDropdowns(); // Close dropdowns when menu is closed
+        }
+      }
+      
+      // Function to toggle dropdown
+      function toggleDropdown(event) {
+          event.stopPropagation(); // Prevent propagation of the click event
+          var parentListItem = event.target.parentElement;
+          parentListItem.classList.toggle('open');
+      }
+      
+      // Function to close all dropdowns
+      function closeDropdowns() {
+          var dropdowns = document.querySelectorAll('.has-dropdown');
+          dropdowns.forEach(function(dropdown) {
+              dropdown.classList.remove('open');
+          });
+      }
+      
+      // Close dropdowns when clicking outside of them
+      document.addEventListener('click', function(event) {
+          var dropdowns = document.querySelectorAll('.has-dropdown');
+          dropdowns.forEach(function(dropdown) {
+              if (!dropdown.contains(event.target)) {
+                  dropdown.classList.remove('open');
+              }
+          });
+      });
+      
+      // Close dropdowns when the window is resized (for responsiveness)
+      window.addEventListener('resize', function() {
+          closeDropdowns();
+      });
+      
+      // Close dropdowns when the mobile menu is closed
+      document.getElementById('ham-icon').addEventListener('click', function(event) {
+          if (!event.currentTarget.classList.contains('open')) {
+              closeDropdowns();
+          }
+      });
+  
+      document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentSlide = 0;
+  
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('prev');
+            
+            currentSlide = (n + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.remove('prev');
+            slides[currentSlide].classList.add('next');
+            
+            setTimeout(() => {
+                slides[currentSlide].classList.remove('next');
+                slides[currentSlide].classList.add('active');
+            }, 50); // Slight delay to ensure transition takes effect
+        }
+  
+        function autoAdvance() {
+            showSlide(currentSlide + 1);
+        }
+  
+        // Show the initial slide
+        slides[currentSlide].classList.add('active');
+  
+        // Auto-advance slides every 3 seconds
+        setInterval(autoAdvance, 3000); // Change the interval as needed
+      });
+    </script>
+  </body>
+</html>

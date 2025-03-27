@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+      
+  <%- include('./partials/head.ejs') %>
+
+  <body>
+    <%- include('./partials/nav.ejs') %>
+
+
+    <section class="hero">
+      <!-- Example central image (replace with your own) -->
+      <img class="hero-img" src="/img/b41.jpg" alt="Drake fan website" />
+  
+      <h1 class="hero-heading">
+        <span>Disability</span>
+        <span>Is not</span>
+        <span>Inability</span>
+      </h1>
+  
+     
+  
+      <!-- Wave at the bottom -->
+      <div class="wave-container">
+        <!-- You can change the path fill to any shape or color you like -->
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+          <path class="wave" d="M0.00,49.98 C150.00,150.00 349.98,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"></path>
+        </svg>
+      </div>
+    </section>
+    <div class="index-first">
+       
+    </div>
+
+    <div class="index-second">
+        <h1>Welcome to Comrade David Ofoeyeno Special School</h1>
+
+        <p>Welcome to Comrade David Ofoeyeno Special School, where every child's journey is met with compassion, dedication, and a commitment to excellence. Nestled in the heart of udu Delta State, our school stands as a beacon of hope and opportunity for children with neurological disorders and their families.</p>
+
+           <p>Founded on the principles of inclusivity and empowerment, Comrade David Ofoeyeno Special School is more than just an educational institution — it's a community dedicated to unlocking the full potential of every child, regardless of their challenges. Named in honor of [Comrade David Ofoeyeno], a visionary leader and advocate for children with special needs, our school embodies his spirit of resilience, compassion, and unwavering belief in the power of education to transform lives.</p>
+            
+<p>At Comrade David Ofoeyeno Special School, our mission is simple yet profound: to provide a nurturing and inclusive environment where each student can thrive academically, socially, and emotionally. We are committed to fostering a culture of acceptance, understanding, and respect, where differences are celebrated and every child is valued for who they are.
+</p>
+
+ 
+           
+             
+    </div>
+    <div class="index-neuro">
+        <div class="index-g">
+            <h2>Our vision</h2>
+            <h2>Here, you’ll find everything you need to stay connected to all things Drake:</h2>
+
+            <p> At our school, we believe in a holistic approach to education that recognizes the unique strengths, abilities, and challenges of each student. Through individualized learning plans, evidence-based practices, and a focus on meaningful outcomes, we empower students to reach their full potential and become active participants in their own learning journey.
+            </p>
+        </div>
+
+        <div class="index-g">
+            <img class="index-neuropix1"     src="/img/s9.jpg" 
+            alt="Drake performing in July 2016" 
+            >
+        </div>
+       
+
+    </div>
+
+    <div class="kelz-images">
+        <div class="kelz-home">
+            <img class="kelz-2home" src="/img/b23.jpg" alt="$ome $exy $ongs">
+ 
+         </div>
+         <div class="kelz-home">
+             <img class="kelz-2home" src="/img/s1.jpg" alt="family matters">
+         </div>
+         <div class="kelz-home">
+             <img class="kelz-2home" src="/img/s3.jpg" alt="the 6">
+         </div>
+         <div class="kelz-home">
+             <img class="kelz-2home" src="/img/s4.jpg" alt="drake fan website">
+         </div>
+        </div>
+
+
+         <!-- NEW: Latest Discography Posts Section -->
+    <!-- Latest Discography Posts Section -->
+    <div class="container">
+        <section class="latest-posts">
+            <a href="/activity" style="text-decoration: none;">
+                <h2>Activity</h2>
+              </a>
+              
+          <% if (activityPosts && activityPosts.length) { %>
+            <div class="posts-grid">
+              <% activityPosts.forEach(post => { %>
+                <div class="card">
+                  <a href="/activity/<%= post.slug %>" class="card-link">
+                    <div class="card-body">
+                      <h4 class="class-title"><%= post.title %></h4>
+                      <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
+                      <% if (post.imagePath) { %>
+                        <div class="image-container">
+                          <img src="/activity/image/<%= post.imagePath %>" 
+                               alt="<%= post.title %>" 
+                               class="article-image"
+                               onerror="this.onerror=null; this.src='/images/placeholder.jpg';">
+                        </div>
+                      <% } %>
+                      <div class="class-text"><%= post.description %></div>
+                    </div>
+                  </a>
+                  <% if (user && user.isAdmin) { %>
+                    <div class="btn-flex">
+                      <a href="/activity/edit/<%= post.id %>" class="Edit">Edit</a>
+                      <form action="/activity/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        <button type="submit" class="btn-danger">Delete</button>
+                      </form>
+                    </div>
+                  <% } %>
+                </div>
+              <% }); %>
+            </div>
+          <% } else { %>
+            <p>No  posts available yet.</p>
+          <% } %>
+        </section>
+      </div>
+
+      <div class="container">
+        <section class="latest-posts">
+            <a href="/about" style="text-decoration: none;">
+                <h2>About Us</h2>
+              </a>
+              
+          <% if (aboutPosts && aboutPosts.length) { %>
+            <div class="posts-grid">
+              <% aboutPosts.forEach(post => { %>
+                <div class="card">
+                  <a href="/about/<%= post.slug %>" class="card-link">
+                    <div class="card-body">
+                      <h4 class="class-title"><%= post.title %></h4>
+                      <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
+                      <% if (post.imagePath) { %>
+                        <div class="image-container">
+                          <img src="/about/image/<%= post.imagePath %>" 
+                               alt="<%= post.title %>" 
+                               class="article-image"
+                               onerror="this.onerror=null; this.src='/images/placeholder.jpg';">
+                        </div>
+                      <% } %>
+                      <div class="class-text"><%= post.description %></div>
+                    </div>
+                  </a>
+                  <% if (user && user.isAdmin) { %>
+                    <div class="btn-flex">
+                      <a href="/about/edit/<%= post.id %>" class="Edit">Edit</a>
+                      <form action="/about/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        <button type="submit" class="btn-danger">Delete</button>
+                      </form>
+                    </div>
+                  <% } %>
+                </div>
+              <% }); %>
+            </div>
+          <% } else { %>
+            <p>No  posts available yet.</p>
+          <% } %>
+        </section>
+      </div>
+
+      <div class="container">
+        <section class="latest-posts">
+            <a href="/academics" style="text-decoration: none;">
+                <h2>Academics</h2>
+              </a>
+              
+          <% if (academicsPosts && academicsPosts.length) { %>
+            <div class="posts-grid">
+              <% academicsPosts.forEach(post => { %>
+                <div class="card">
+                  <a href="/academics/<%= post.slug %>" class="card-link">
+                    <div class="card-body">
+                      <h4 class="class-title"><%= post.title %></h4>
+                      <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
+                      <% if (post.imagePath) { %>
+                        <div class="image-container">
+                          <img src="/academics/image/<%= post.imagePath %>" 
+                               alt="<%= post.title %>" 
+                               class="article-image"
+                               onerror="this.onerror=null; this.src='/images/placeholder.jpg';">
+                        </div>
+                      <% } %>
+                      <div class="class-text"><%= post.description %></div>
+                    </div>
+                  </a>
+                  <% if (user && user.isAdmin) { %>
+                    <div class="btn-flex">
+                      <a href="/academics/edit/<%= post.id %>" class="Edit">Edit</a>
+                      <form action="/academics/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        <button type="submit" class="btn-danger">Delete</button>
+                      </form>
+                    </div>
+                  <% } %>
+                </div>
+              <% }); %>
+            </div>
+          <% } else { %>
+            <p>No  posts available yet.</p>
+          <% } %>
+        </section>
+      </div>
+
+   
+ 
+  
+  
+
+      <section class="socials-section">
+        <h2>SOCIALS</h2>
+        <h3>Follow Drake on social media!</h3>
+    
+        <div class="socials-container">
+          <!-- Facebook -->
+          <div class="social-item">
+            <a href="https://web.facebook.com/p/Comrade-David-Ofoeyeno-School-For-Special-Children-100048106376007/?_rdc=1&_rdr#" target="_blank" rel="noopener">
+              <div class="social-bg">Fb</div>
+              <div class="social-name">Facebook</div>
+            </a>
+          </div>
+    
+         
+    
+          <!-- Twitter (X) -->
+          <div class="social-item">
+            <a href="mailto:ofoeyenoautismschool@yahoo.com">
+                <div class="social-bg">📧</div>
+                <div class="social-name">Email</div>
+            </a>
+        </div>
+        
+    
+       
+    
+          <!-- YouTube -->
+          <div class="social-item">
+            <a href="tel:+2348162144476">
+                <div class="social-bg">📞</div>
+                <div class="social-name">Call Us</div>
+            </a>
+        </div>
+        
+        </div>
+      </section>
+
+      <div class="kelz2-images">
+        <div class="kelz-11">
+            <img class="kelz-22" src="/img/t1.jpg" alt="Image M1">
+        </div>
+        <div class="kelz-11">
+            <img class="kelz-22" src="/img/s2.jpg" alt="Image M2">
+        </div>
+        <div class="kelz-11">
+            <img class="kelz-22" src="/img/a11.jpg" alt="Image M5">
+        </div>
+        <div class="kelz-11">
+            <img class="kelz-22" src="/img/st1.jpg" alt="Image M4">
+        </div>
+    </div>
+  
+
+    <%- include('./partials/footer.ejs') %>
+    <script>
+        function toggleMobileMenu(menu) {
+        var isOpen = menu.classList.toggle('open');
+        if (!isOpen) {
+            closeDropdowns(); // Close dropdowns when menu is closed
+        }
+      }
+      
+      // Function to toggle dropdown
+      function toggleDropdown(event) {
+          event.stopPropagation(); // Prevent propagation of the click event
+          var parentListItem = event.target.parentElement;
+          parentListItem.classList.toggle('open');
+      }
+      
+      // Function to close all dropdowns
+      function closeDropdowns() {
+          var dropdowns = document.querySelectorAll('.has-dropdown');
+          dropdowns.forEach(function(dropdown) {
+              dropdown.classList.remove('open');
+          });
+      }
+      
+      // Close dropdowns when clicking outside of them
+      document.addEventListener('click', function(event) {
+          var dropdowns = document.querySelectorAll('.has-dropdown');
+          dropdowns.forEach(function(dropdown) {
+              if (!dropdown.contains(event.target)) {
+                  dropdown.classList.remove('open');
+              }
+          });
+      });
+      
+      // Close dropdowns when the window is resized (for responsiveness)
+      window.addEventListener('resize', function() {
+          closeDropdowns();
+      });
+      
+      // Close dropdowns when the mobile menu is closed
+      document.getElementById('ham-icon').addEventListener('click', function(event) {
+          if (!event.currentTarget.classList.contains('open')) {
+              closeDropdowns();
+          }
+      });
+      
+      document.addEventListener("DOMContentLoaded", function () {
+  const items = document.querySelectorAll(".kelz-home");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  }, { threshold: 0.1 });
+
+  items.forEach(item => observer.observe(item));
+});
+document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('.kelz-22');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            images.forEach(image => {
+                observer.observe(image);
+            });
+        });
+    </script>
+    
+  </body>
+</html>

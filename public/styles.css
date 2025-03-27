@@ -1,0 +1,1615 @@
+/* Ensure the image is responsive */
+/* Container for the entire page */
+.container {
+    max-width: 1200px;  /* Max width for the container */
+    margin: 0 auto;     /* Center the container */
+    padding: 20px;
+  }
+  
+  /* Grid container for the posts */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns, each taking up equal space */
+    gap: 20px;  /* Space between grid items */
+    margin-top: 30px;
+    justify-items: stretch; /* Ensure grid items fill each cell */
+  }
+  
+  /* Ensure direct children of the grid span one cell (optional) */
+  .posts-grid > .card-link {
+    grid-column: span 1;
+  }
+  
+  /* Styling for each card (post) */
+  .card {
+    background-color: #f9f9f9;  /* Light background color */
+    border-radius: 8px;         /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden;           /* Ensures content doesn’t overflow */
+    padding: 20px;
+  }
+  
+  /* Card-link styling */
+  .card-link {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+  
+  /* Title of each post */
+  .class-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: darkred;
+  }
+  
+  /* Subtitle (createdAt) */
+  .sub-title {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  /* Image for the article preview */
+  .article-image {
+    width: 100%;               /* Ensure the image is responsive */
+    height: auto;              /* Keep the aspect ratio intact */
+    max-height: 300px;         /* Limit the image height */
+    object-fit: contain;       /* Prevent the image from being cropped */
+    border-radius: 8px;        /* Round image corners */
+    display: block;            /* Fix spacing issues */
+    margin-bottom: 15px;       /* Add some space below the image */
+  }
+  
+  /* Description of each post */
+  .class-text {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Action buttons for Read More, Edit, and Delete */
+  .btn-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Style for Read More link */
+  .read-more {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  /* Style for Edit link */
+  .Edit {
+    color: #28a745;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .Edit:hover {
+    text-decoration: underline;
+  }
+  
+  /* Style for Delete button */
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Media query to adjust the grid layout on smaller screens (e.g., mobile) */
+  @media (max-width: 768px) {
+    .posts-grid {
+        grid-template-columns: 1fr;  /* On smaller screens, make it 1 column */
+    }
+  }
+  
+  form {
+    width: 100%; /* Full width */
+    padding: 20px; /* Increased padding */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    font-size: 18px; /* Larger base font size for better readability */
+  }
+  
+  /* Form Groups */
+  .form-group {
+    margin-bottom: 25px; /* Increased space between form groups */
+  }
+  
+  /* Labels */
+  .form-group label {
+    font-size: 18px; /* Larger font size for labels */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px; /* Increased space below labels */
+  }
+  
+  /* Inputs and Textareas */
+  .form-group input[type="text"],
+  .form-group textarea,
+  .form-group input[type="file"] {
+    width: 100%; /* Full width */
+    padding: 30px; /* Larger padding for better touch interaction */
+    font-size: 16px; /* Increased font size for inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+  }
+  /* Textareas */
+  #markdown,
+  #description {
+    padding: 15px; /* Larger padding */
+    min-height: 200px; /* Taller minimum height for easier typing */
+  }
+  
+  /* Buttons */
+  .btn-cancel {
+    background-color: green;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .save-new {
+    background-color: blue;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .btn-cancel {
+    background-color: green; /* Your existing button color */
+    color: white;
+  }
+  
+  .btn-cancel:hover {
+    background-color: darkgreen; /* Darker shade on hover */
+  }
+  
+  .save-new {
+    background-color: blue; /* Your existing button color */
+    color: white;
+  }
+  
+  .save-new:hover {
+    background-color: darkblue; /* Darker shade on hover */
+  }
+  
+  @media (min-width: 1000px) {
+    .form-group{
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  #markdown{
+      padding: 50px;
+  }
+  
+  #description{
+      padding: 30px;
+  }
+  
+  .btn-cancel{
+      background-color: green;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+  }
+  
+  .save-new{
+      background-color: blue;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+  }
+  }
+  
+  .all-articles{
+      background-color: blue;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+  }
+  
+  .edit-articles{
+      background-color: green;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+  }
+  
+  .read-more{
+      background-color: green;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 5px;
+  }
+  
+  
+  .article-body{
+    padding: 10px;
+  }
+  
+  
+  
+  
+  /* General Reset */
+  * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+  }
+  
+  body{
+    background-color: white;
+  }
+  
+  /* Typography */
+  /* Define Roboto Slab font for headings */
+  
+  
+  .roboto-slab p {
+      font-family: "Roboto Slab", serif;
+      font-optical-sizing: auto;
+      font-weight: light;
+      font-style: normal;
+  }
+  
+  p{
+      font-size: 11pt !important;
+      line-height: 30px;
+      margin: 15px 0;
+      color: gray !important;
+      font-weight: 400;
+      font-family: 'Roboto Slab', serif !important;
+      text-align: justify !important;
+    }
+  
+  h1 {
+      font-family: "Roboto Slab", serif !important;
+      font-weight: bold !important;
+      color: darkred;
+    text-align: center;
+    }
+    h2{
+      font-family: "Roboto Slab", serif !important;
+      font-weight: bold !important;
+      color: darkred;
+    
+      
+    }
+    ul{
+      font-family: "Roboto Slab", serif !important;
+      font-weight: bold !important;
+    }
+  
+  p {
+      font-size: 11pt !important;
+      line-height: 30px;
+      margin: 15px 0;
+      font-weight: 400;
+      font-family: 'Roboto Slab', serif !important;
+      text-align: justify !important;
+  }
+  
+  header a {
+      text-decoration: none;
+    }
+    
+    header {
+      padding: 0 20px;
+      background-color: darkred;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .logo-img {
+      height: 50px;
+    }
+    
+    .brand {
+      font-weight: bold;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    
+    }
+    
+    .brand a {
+      color: darkred;
+    }
+    
+    ul {
+      list-style: none;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    
+    ul a {
+      color: white;
+    }
+    
+    ul li {
+      padding: 5px;
+      margin-left: 10px;
+    }
+    
+    ul li:hover {
+      transform: scale(1.1);
+      transition: 0.3s;
+    }
+    
+    .dropdown {
+      position: relative;
+      z-index: 101;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: darkred;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li {
+      padding: 10px;
+    }
+    
+    .dropdown-menu li:hover {
+      background-color: darkred;
+    }
+    
+    #ham-icon {
+      margin: auto 0;
+      display: none;
+      cursor: pointer;
+    }
+    
+    #ham-icon div {
+      width: 35px;
+      height: 3px;
+      background-color: white;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+    
+    .open .bar1 {
+      -webkit-transform: rotate(-45deg) translate(-6px, 6px);
+      transform: rotate(-45deg) translate(-6px, 6px);
+    }
+    
+    .open .bar2 {
+      opacity: 0;
+    }
+    
+    .open .bar3 {
+      -webkit-transform: rotate(-45deg) translate(-6px, 8px);
+      transform: rotate(-45deg) translate(-6px, 8px);
+    }
+    
+    .open .mobile-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      background-color: darkred;
+      left: 0;
+      height: calc(100vh - 50px);
+      width: 100%;
+      font-size: 30px;
+      z-index: 100;
+    }
+    
+    .mobile-menu li {
+      margin: 20px 0;
+    }
+    
+    /* New styles for dropdown menu */
+    
+    .drop {
+      display: none;
+      flex-direction: column;
+      background-color: darkred;
+      padding: 0 60px;
+    }
+    
+    .drop li {
+      margin: 0;
+    }
+    
+    .has-dropdown.open .drop {
+      display: block;
+    }
+    
+    @media only screen and (max-width: 920px) {
+      header nav {
+        display: none;
+      }
+    
+      #ham-icon {
+        display: block;
+      }
+    
+    }
+  
+  .index-first {
+      background-image: url('img/b24.jpg');
+      background-size: cover; /* Ensures the background covers the entire div */
+      background-position: center; /* Centers the image */
+      height: 70vh; /* Sets the height to full viewport height; adjust as needed */
+      width: 100%; /* Full width */
+      display: flex; /* Use flexbox for content alignment, if needed */
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically */
+      color: white; /* Adjust text color for better visibility */
+      padding: 30px;
+      margin-top: 10px;
+  }
+  
+  .index-first h2{
+      padding-top: 50px;
+      
+  }
+  
+  .index-second{
+      
+      padding: 20px;
+  }
+  
+  .index-second p{
+      font-size: 17px !important;
+  }
+  
+  .index-second h1, h2{
+    text-align: center;
+  }
+  
+  .index-second ul{
+    padding-right: 200px;
+  }
+  
+  .index-neuro{
+    padding: 80px 20px;
+  }
+  
+  .index-neuro h2{
+    color: darkred;
+    padding: 10px;
+  }
+  .index-neuropix1{
+    width: 100%;
+    padding: 20px 0;
+  }
+  
+  
+  
+  .disco-first{
+  
+  }
+  
+  .disco-2nd {
+    position: relative;
+    background-color: lightblue; /* Light blue background */
+    padding: 20px;
+    border-radius: 10px; /* Optional: rounded corners */
+    clip-path: polygon(
+      0% 0%, /* Top-left corner */
+      100% 0%, /* Top-right corner */
+      100% calc(100% - 40px), /* Bottom-right corner (before zigzag) */
+      90% 100%, /* Start of zigzag */
+      70% calc(100% - 40px),
+      50% 100%,
+      30% calc(100% - 40px),
+      10% 100%,
+      0% calc(100% - 40px) /* Bottom-left corner */
+    );
+  }
+  
+  .disco-2nd h1{
+    color: darkred;
+    text-align: center;
+    
+  }
+  .disco-2nd p{
+    color: black !important;
+    font-size: 11pt !important;
+    line-height: 30px !important;
+  }
+  
+  .disco-3rd{
+    padding: 10px;
+  }
+  
+  .disco-3rd h2{
+    padding-top: 10px;
+  }
+  
+  .discogrid-pics{
+    
+    
+    width: 100%;
+  }
+  
+  .discogrid-pix{
+    width: 100%;
+    padding-top: 20px;
+  }
+  
+  .carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+  }
+  
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    transition: left 2s ease-in-out;
+  }
+  
+  .carousel-slide.active {
+    left: 0;
+  }
+  
+  .carousel-slide.next {
+    left: 100%;
+  }
+  
+  .carousel-slide.prev {
+    left: -100%;
+  }
+  
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    
+  }
+  
+  
+  
+  @media only screen and (min-width: 1000px) {
+    .disco-3rd{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap:5px;
+      padding: 2px;
+    }
+    .disco-grid{
+      align-items: center;
+    width: 100%;
+    padding: 2px 0;
+    }
+  
+    .disco-first{
+     
+    }
+  
+    .disco-2nd h1{
+      font-size: 1.8rem !important;
+    font-weight: bold !important;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    }
+    .disco-2nd p{
+      font-size: 1rem !important;
+    line-height: 1.6 !important;
+    align-items: center;
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 400px; /* Adjust height as needed */
+    }
+    
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
+      transition: left 2s ease-in-out;
+    }
+    
+    .carousel-slide.active {
+      left: 0;
+    }
+    
+    .carousel-slide.next {
+      left: 100%;
+    }
+    
+    .carousel-slide.prev {
+      left: -100%;
+    }
+    
+    .carousel-slide img {
+      width: 100%;
+      height: 100vh;
+      
+    }
+  
+    .index-neuro{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 50px 200px;
+      
+  }
+  
+  .index-neuro h2{
+      font-size: 25px;
+      padding: 0 50px;
+   }
+   .index-neuropix1{
+      width: 500px;
+      height: 600px;
+      
+   }
+  
+   .index-neuro p{
+      font-size: 15px;
+      width: 400px;
+   }
+  
+  }
+  /* Base Styles for Mobile First */
+  .updates-2nd {
+    position: relative;
+    margin: 10px;
+    padding: 2rem;
+    background: #000; /* Black background for sleek look */
+    color: #fff !important; /* White text for contrast */
+    text-align: center;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .updates-2nd h2 {
+    font-size: 1.8rem !important;
+    font-weight: bold !important;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ff7f50 !important; /* Accent color for heading */
+  }
+  
+  .updates-2nd p {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    color: #eaeaea !important; /* Softer white for text */
+  }
+  
+  /* Wavy background effect */
+  .updates-2nd::before {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 200%;
+    height: 100px;
+    background: linear-gradient(90deg, #ff7f50, #ff4500);
+    border-radius: 50% 50% 0 0;
+    z-index: 0;
+    transform: rotate(-5deg);
+  }
+  
+  /* Media Query for Larger Screens */
+  /* Media Query for Larger Screens */
+  @media (min-width: 768px) {
+    .updates-2nd {
+        padding: 4rem 3rem;
+        border-radius: 20px;
+    }
+  
+    .updates-2nd h2 {
+        font-size: 2.5rem !important;
+    }
+  
+    .updates-2nd p {
+        font-size: 1.2rem !important;
+        line-height: 1.8 !important;
+    }
+  
+    .updates-2nd::before {
+        height: 120px !important; /* Adjust wave height for desktop */
+        transform: rotate(0deg); /* Keep it straighter */
+    }
+  }
+  
+  
+  
+  /* Container for updates page */
+  .updates-container {
+    padding: 20px;
+  }
+  
+  .updates-container h1 {
+    text-align: center;
+    color: #09c372;
+    margin-bottom: 20px;
+  }
+  
+  /* Grid layout for blog posts */
+  .updates-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .update-card {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for the image */
+  .update-image img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Content section */
+  .update-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .update-content h2 {
+    color: #002d5a;
+    font-family: "Roboto Slab", serif;
+    margin-bottom: 10px;
+  }
+  
+  .update-content p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .read-more {
+    align-self: flex-start;
+    background-color: #09c372;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .read-more:hover {
+    background-color: #007a53;
+  }
+  
+  /* Responsive layout */
+  @media (min-width: 768px) {
+    .posts-grid {
+      grid-template-columns: 1fr 1fr; /* Two equal columns on tablets and mobile */
+      gap: 15px;
+  }
+  }
+  @media (max-width: 480px) {
+    .posts-grid {
+      grid-template-columns: 1fr 1fr; /* Still two equal columns on phones */
+      gap: 10px;
+  }
+  }
+  
+  /* Base styles (mobile-first) */
+  /* Fullwidth grid wrapper to force full-bleed */
+  .fullwidth-grid {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 1rem;
+    background-color: #f9f9f9; /* Optional background color */
+  }
+  
+  /* Mobile-First Base Styles for Latest Posts */
+  .latest-posts h2 {
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .latest-posts .post-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .latest-posts .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .latest-posts .post-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .latest-posts .post-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .latest-posts .post-card p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.4;
+  }
+  
+  .latest-posts .post-card .post-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .latest-posts h2{
+    color: green !important;
+  }
+  /* Grid Layout for Larger Screens */
+  @media (min-width: 768px) {
+    .fullwidth-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .fullwidth-grid h2 {
+      grid-column: 1 / -1; /* Heading spans full grid width */
+      font-size: 2rem;
+    }
+  }
+  
+  .socials-section {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .socials-section h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: lightcoral; /* Pink color for the heading */
+    margin-bottom: 10px;
+  }
+  
+  .socials-section h3 {
+    font-size: 1.25rem;
+    color: green;
+    margin-bottom: 40px;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* SOCIAL ICON GRID */
+  .socials-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .social-item {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.2s ease;
+  }
+  
+  .social-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* The big, semi-transparent letters (e.g., "Fb", "Ig", etc.) */
+  .social-bg {
+    position: absolute;
+    font-size: 4rem;
+    color: #FF66CC;
+    opacity: 0.15; /* Make it semi-transparent */
+    z-index: 1;
+  }
+  
+  /* The visible text (e.g., "Facebook") */
+  .social-name {
+    position: relative;
+    z-index: 2; /* On top of the background letters */
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+  
+  /* OPTIONAL: Style the actual link so the entire block is clickable */
+  .social-item a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+  
+  /* HERO SECTION */
+  .hero {
+    position: relative;
+    background-color: pink;
+    /* Only keep top padding if needed; remove left/right padding */
+    padding: 60px 0 0 0; 
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    margin: 0; /* Ensure no extra margin on body or hero */
+  }
+  
+  .hero-rec{
+    position: relative;
+    background-color: black;
+    /* Only keep top padding if needed; remove left/right padding */
+    padding: 60px 0 0 0; 
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    margin: 0; /* Ensure no extra margin on body or hero */
+  
+  }
+  
+  /* Large text overlay (Jennie Ruby) */
+  .hero-heading {
+    font-family: 'Great Vibes', cursive; /* Example cursive font */
+    font-size: 5rem; /* Adjust as needed */
+    color: #FF0033; /* Vibrant red/pink color */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .hero-heading span {
+    white-space: nowrap; /* Keep each name on its own */
+  }
+  
+  /* Optional central image */
+  .hero-img {
+    max-width: 250px; /* Adjust to your preference */
+    width: 100%;
+    margin: 0 auto 30px;
+    display: block;
+  }
+  
+  /* Button */
+  .hero-btn {
+    display: inline-block;
+    background-color: #FF0033;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-bottom: 60px; /* Space before wave */
+    text-decoration: none;
+  }
+  .hero-btn:hover {
+    background-color: #ff3366;
+    transform: translateY(-3px);
+  }
+  
+  /* WAVE TRANSITION */
+  .wave-container {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Wave height */
+    overflow: hidden;
+    line-height: 0;
+  }
+  .wave-container svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .wave-container .wave {
+    fill: lightblue; /* Pink color for the next section */
+  }
+  .wave-container-rec {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Wave height */
+    overflow: hidden;
+    line-height: 0;
+  }
+  .wave-container-rec svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .wave-container-rec .wave {
+    fill: white; /* Pink color for the next section */
+  }
+  
+  
+  /* Records Section */
+  .records-first {
+    padding: 20px;
+    
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    max-width: 100%;
+    width: 90%;
+  }
+  
+  .records-first h2 {
+    font-size: 2rem;
+    color: black;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .records-first p {
+    font-size: 1rem;
+    color: #dcdcdc;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+  
+  /* Records Container */
+  .records-container {
+    max-width: 1200px;  /* Max width for the container */
+    margin: 0 auto;     /* Center the container */
+    padding: 20px;
+  }
+  
+  .records-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns, each taking up equal space */
+    gap: 20px;  /* Space between grid items */
+    margin-top: 30px;
+    justify-items: stretch; /* Ensure grid items fill each cell */
+    
+  }         
+  
+  .records-card {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+  }
+  
+  .records-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .records-card-body {
+    padding: 15px;
+  }
+  
+  .records-card-body h4 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .records-sub-title {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    margin-bottom: 10px;
+  }
+  
+  .records-article-image {
+    width: 100%;               /* Ensure the image is responsive */
+    height: auto;              /* Keep the aspect ratio intact */
+    max-height: 300px;         /* Limit the image height */
+    object-fit: contain;       /* Prevent the image from being cropped */
+    border-radius: 8px;        /* Round image corners */
+    display: block;            /* Make sure the image is a block element (fixes spacing issues) */
+    margin-bottom: 15px;  
+  }
+  
+  /* Description and Action Buttons */
+  .records-class-text {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #b0b0b0;
+    text-align: justify;
+    line-height: 1.6;
+  }
+  
+  .records-btn-flex {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  
+  .records-read-more {
+    color: #1db954;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .records-read-more:hover {
+    background-color: #444;
+  }
+  
+  .records-Edit, .records-btn-danger {
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    background-color: #ff5733;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .records-Edit:hover, .records-btn-danger:hover {
+    background-color: #e03e2f;
+  }
+  .streaming-first{
+    background-image: url("img/b3.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    width: 100%;
+  
+    box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, .3);
+  
+  }
+  
+  
+  .streaming-second{
+    padding: 20px;
+    font-size: 20px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  /* Grid Layout */
+  .kelz-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* two equal columns */
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  /* Responsive adjustment (optional)
+     Uncomment the next block if you want one column on very small screens */
+  /*
+  @media (max-width: 600px) {
+    .kelz-images {
+      grid-template-columns: 1fr;
+    }
+  }
+  */
+  
+  .kelz-1 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    
+  }
+  
+  /* When the element becomes visible (class added via JavaScript) */
+  .kelz-1.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Stagger animation delays for each item (adjust as needed) */
+  .kelz-1:nth-child(1) {
+    transition-delay: 0.5s;
+  }
+  .kelz-1:nth-child(2) {
+    transition-delay: 1s;
+  }
+  .kelz-1:nth-child(3) {
+    transition-delay: 1.5s;
+  }
+  .kelz-1:nth-child(4) {
+    transition-delay: 2s;
+  }
+  
+  /* Make images fill their container */
+  .kelz-2 {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Grid Layout */
+  .kelz-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* two equal columns */
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  /* Responsive adjustment (optional)
+     Uncomment the next block if you want one column on very small screens */
+  /*
+  @media (max-width: 600px) {
+    .kelz-images {
+      grid-template-columns: 1fr;
+    }
+  }
+  */
+  
+  .kelz-home {
+    opacity: 0;
+  
+    transform: translateY(calc(20px + var(--zigzag-offset, 0)));
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Creates a square (1:1 aspect ratio) */
+    overflow: hidden;
+  }
+  
+  /* When the element becomes visible (class added via JavaScript) */
+  .kelz-home.visible {
+    opacity: 1;
+    transform: translateY(var(--zigzag-offset, 0));
+  }
+  .kelz-home:nth-child(odd) {
+    --zigzag-offset: -30px;   /* Odd items stay at baseline */
+  }
+  
+  .kelz-home:nth-child(even) {
+    --zigzag-offset: 30px;  /* Even items are shifted down by 20px */
+  }
+  
+  /* Stagger animation delays for each item (adjust as needed) */
+  .kelz-home:nth-child(1) {
+    transition-delay: 0.5s;
+  }
+  .kelz-home:nth-child(2) {
+    transition-delay: 1s;
+  }
+  .kelz-home:nth-child(3) {
+    transition-delay: 1.5s;
+  }
+  .kelz-home:nth-child(4) {
+    transition-delay: 2s;
+  }
+  
+  /* Make images fill their container */
+  .kelz-2home {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures the image covers the container without distortion */
+    border-radius: 50%; /* Makes the image circular */
+    display: block;
+  }
+  @media (min-width: 1024px) {
+    .kelz-images {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .kelz-home {
+      max-width: 250px;   /* Limits the container width to 150px */
+      width: 100%;
+      margin: 0 auto;     /* Centers the container within its grid cell */
+      /* The padding-top: 100% rule keeps the container square */
+    }
+  }
+  /* Media Queries for Larger Screens */
+  @media screen and (min-width: 600px) {
+    .records-posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Smaller grid items for medium screens */
+    }
+  
+    .records-card-body h4 {
+        font-size: 1.8rem;
+    }
+  
+    .records-class-text {
+        font-size: 1.1rem;
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .records-posts-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns, each taking up equal space */
+      gap: 20px;  /* Space between grid items */
+      margin-top: 30px; /* Three columns on desktop */
+    }
+  
+    .records-card-body h4 {
+        font-size: 2rem !important;
+    }
+  
+    .records-class-text {
+        font-size: 1.2rem !important;
+    }
+  }
+  /* Mobile-First Styles */
+  .record-2nd {
+    display: grid; /* Use grid layout for mobile by default */
+    grid-template-columns: 1fr; /* Single column for mobile */
+    gap: 15px; /* Small gap between images */
+    padding: 20px;
+   
+    margin: 30px 0;
+    background-color: transparent; /* Make sure the background is transparent */
+  }
+  
+  .record-2ndpic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensure no excess space around images */
+    background-color: transparent; /* Ensure the background is transparent */
+  }
+  
+  .record-2ndpic img {
+    width: 300px; /* Smaller size for mobile */
+    height: 300px;
+    border-radius: 50%; /* Circular images */
+    object-fit: cover; /* Ensures image fills circle without distortion */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+    border: none; /* Remove any potential border around the image */
+    padding: 0; /* Ensure no padding around the image */
+  }
+  
+  .record-2ndpic img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Media Query for Tablets and Above (Larger Screens) */
+  @media (min-width: 768px) {
+    .record-2nd {
+        grid-template-columns: 1fr 1fr; /* Two columns for larger screens */
+        gap: 20px; /* Slightly bigger gap between images */
+    }
+  
+    .record-2ndpic img {
+        width: 300px; /* Increase image size for larger screens */
+        height: 300px;
+    }
+  }
+  
+  /* Media Query for Desktops (Even Larger Screens) */
+  @media (min-width: 1024px) {
+    .record-2nd {
+        grid-template-columns: 1fr 1fr; /* Keep two columns for desktop */
+        gap: 30px; /* More space between images */
+    }
+  
+    .record-2ndpic img {
+        width: 300px; /* Larger image size for desktops */
+        height: 300px;
+    }
+  }
+
+  .aut-wrap {
+    background-image: url("img/A7.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    width: 100%;
+  
+    box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, .3);
+  }
+
+  .aut-first {
+    text-align: center;
+    color: white;
+    padding: 190px 0;
+    font-family: arial;
+  
+  }
+
+  .aut-first p{
+    text-align: center;
+    padding: 0 20px;
+   
+    
+    color: white !important;
+  }
+
+/* Default: Mobile-first design */
+.aut-2nd {
+  background-color: #f0f8ff; /* Light blue background */
+  border-left: 4px solid red; /* Blue left border */
+  padding: 15px;
+  margin: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.aut-2nd h1 {
+  color: #0073e6; /* Autism awareness blue */
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.aut-2nd p {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.about-com{
+  padding: 20px;
+  margin: 20px;
+}
+
+.kelz-22{
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+
+
+}
+.kelz-22.in-view{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Larger screens (Tablets & Desktops) */
+@media (min-width: 768px) {
+  
+
+  .aut-first p{
+    padding-left: 400px;
+  }
+  .aut-2nd {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-left: 6px solid #0073e6;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .aut-2nd h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+  }
+
+  .aut-2nd p {
+      font-size: 18px;
+      line-height: 1.6;
+  }
+  .kelz2-images{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    gap: 10px;
+    padding: 0 20px;
+  }
+
+  .kelz-11{
+    margin-bottom: 0; /* Reset margin for desktop */
+  }
+}
+
+.aca-first{
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+  background-color: lightblue;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+
+  
+  
+  
+.footer{
+  background-color: darkred;
+  padding: 20px;
+    text-align: center !important;
+
+}
+
+.footer p{
+  color: white !important;
+  font-family: roboto;
+  text-align: center !important;
+}
+  
+  
