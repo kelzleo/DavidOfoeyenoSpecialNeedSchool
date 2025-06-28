@@ -1,3 +1,4 @@
+// app.js
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
@@ -6,7 +7,6 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const passport = require('./config/passport-setup');
 const flash = require('connect-flash');
-const Grid = require('gridfs-stream');
 
 const app = express();
 
@@ -24,9 +24,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// Initialize gfs globally
-let gfs;
-
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -35,13 +32,7 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 .then(() => {
   console.log('MongoDB connected');
-  
-  // Init stream
-  gfs = Grid(mongoose.connection.db, mongoose.mongo);
-  gfs.collection('red');
-  app.locals.gfs = gfs;
-
-  // Mount routes and start server
+  app.locals.bucketName = process.env.GOOGLE_CLOUD_BUCKET; // Make bucket name available to templates
   mountRoutesAndStartServer();
 })
 .catch(err => {
@@ -84,9 +75,9 @@ function mountRoutesAndStartServer() {
   app.get('/autism', async (req, res) => {
     try {
       const autismPosts = await Article.find({ category: 'Autism' }).sort({ createdAt: 'desc' });
-      res.render('autism/autism', { title: 'Austism', posts: autismPosts, user: req.user });
+      res.render('autism/autism', { title: 'Autism', posts: autismPosts, user: req.user });
     } catch (error) {
-      console.error('Error fetching staffs posts:', error);
+      console.error('Error fetching autism posts:', error);
       res.status(500).send('Internal Server Error');
     }
   });
@@ -101,7 +92,6 @@ function mountRoutesAndStartServer() {
     }
   });
 
-
   app.get('/category/:category', async (req, res) => {
     try {
       const posts = await Article.find({ category: req.params.category }).sort({ createdAt: 'desc' });
@@ -115,24 +105,18 @@ function mountRoutesAndStartServer() {
   // Mount route files
   const activityRoutes = require('./routes/activity');
   const aboutRoutes = require('./routes/about');
-  const staffsRoutes = require ('./routes/staffs');
-  const autismRoutes = require('./routes/autism')
-  const academicsRoutes = require('./routes/academics')
-
- 
+  const staffsRoutes = require('./routes/staffs');
+  const autismRoutes = require('./routes/autism');
+  const academicsRoutes = require('./routes/academics');
   const authRoutes = require('./routes/auth');
   const indexRoutes = require('./routes/index');
   
- 
   app.use('/activity', activityRoutes);
-  app.use('/about', aboutRoutes)
-  app.use('/staffs', staffsRoutes)
-  app.use('/autism', autismRoutes)
-  app.use ('/academics', academicsRoutes)
-
+  app.use('/about', aboutRoutes);
+  app.use('/staffs', staffsRoutes);
+  app.use('/autism', autismRoutes);
+  app.use('/academics', academicsRoutes);
   app.use('/', indexRoutes);
-  
-  
   app.use(authRoutes);
 
   // Error handling middleware

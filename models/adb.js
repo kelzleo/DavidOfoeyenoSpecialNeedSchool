@@ -33,7 +33,7 @@ const articleSchema = new mongoose.Schema({
     required: true
   },
   imagePath: {
-    type: String, // Stores the GridFS file ID (as a string)
+    type: String, // Stores the file name in Google Cloud Storage
     required: false
   },
   category: { 

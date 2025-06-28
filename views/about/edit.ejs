@@ -1,16 +1,11 @@
+<!-- views/about/edit.ejs -->
 <!DOCTYPE html>
 <html lang="en">
     <%- include('../partials/head.ejs', { title: 'Edit News' }) %>
-
-
     <body>
        <h1 class="new-head">Edit News</h1>
-
        <form action="/about/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-        <%- include('../partials/form-about.ejs') %>
-      </form>
-      
-     
-
+         <%- include('../partials/form-about.ejs') %>
+       </form>
     </body>
 </html>
