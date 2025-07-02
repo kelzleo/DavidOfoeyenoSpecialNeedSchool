@@ -1,35 +1,52 @@
 <!-- views/staffs/staffs.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: 'Staffs' }) %>
+    <%- include('../partials/head.ejs', { 
+        title: 'Our Staff - David Ofoeyeno Special School', 
+        description: 'Meet the dedicated staff at David Ofoeyeno Special School in Warri, Delta State, providing 24/7 care and education for children with autism and neurological disorders.' 
+    }) %>
 
     <body>
         <%- include('../partials/nav.ejs') %>
 
         <div class="records-first">
-            <h2>Meet Our Dedicated Staff</h2>
-            <p>At the Comrade David Ofoeyeno School for Special Children with Neurological Disorders, our team of passionate and dedicated professionals is committed to providing exceptional care and support for our students. Each member of our staff brings unique skills, experiences, and compassion to our community, creating a nurturing environment where every child can thrive.</p>
-            <h2>24 Hours Service</h2>
-            <p>Our staff, both teaching and non-teaching, ensure the children are looked after and cared for 24 hours a day. They are also taught different tasks to enable the development of their skills and abilities.</p>
+            <h1>Meet Our Dedicated Staff</h1>
+            <p>
+                At <a href="/">David Ofoeyeno Special School</a> in Warri, Delta State, our team of passionate professionals is committed to providing exceptional care and education for children with autism and neurological disorders. Our qualified staff, including teachers, therapists, and caregivers, create a nurturing environment where every child can thrive. Learn more about our <a href="/academics">academic programs</a> and <a href="/activity">activities</a>.
+            </p>
+            <h2>24/7 Care and Support</h2>
+            <p>
+                Our teaching and non-teaching staff provide round-the-clock care, ensuring children develop essential skills and abilities through tailored tasks and support. Explore our <a href="/about">mission and community</a> to see how we make a difference.
+            </p>
         </div>
 
         <div class="record-2nd">
             <div class="record-2ndpic">
-                <img src="https://storage.googleapis.com/<%= bucketName %>/direct/st1.jpg" alt="ovo">
+                <img 
+                    src="https://storage.googleapis.com/<%= bucketName %>/direct/st1.jpg" 
+                    alt="Staff at David Ofoeyeno Special School"
+                >
             </div>
             <div class="record-2ndpic">
-                <img src="https://storage.googleapis.com/<%= bucketName %>/direct/b19.jpg" alt="drake spotify record">
+                <img 
+                    src="https://storage.googleapis.com/<%= bucketName %>/direct/b19.jpg" 
+                    alt="Caregivers supporting students at David Ofoeyeno Special School"
+                >
             </div>
         </div>
 
         <section class="hero-rec">
-          <img class="hero-img" src="https://storage.googleapis.com/<%= bucketName %>/direct/logo.jpg" alt="Drake fan website" />
-          <h1 class="hero-heading">
+          <img 
+              class="hero-img" 
+              src="https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg" 
+              alt="David Ofoeyeno Special School logo"
+          />
+          <h2 class="hero-heading">
             <span>Well</span>
             <span>Experienced</span>
             <span>And</span>
             <span>Dedicated</span>
-          </h1>
+          </h2>
           <div class="wave-container-rec">
             <svg viewBox="0 0 500 150" preserveAspectRatio="none">
               <path class="wave" d="M0.00,49.98 C150.00,150.00 349.98,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"></path>
@@ -44,17 +61,17 @@
       
           <div class="records-posts-grid">
             <% posts.forEach(post => { %>
-              <div class="records-card">
+              <article class="records-card">
                 <a href="/staffs/<%= post.slug %>" class="card-link">
                   <div class="records-card-body">
-                    <h4 class="class-title"><%= post.title %></h4>
+                    <h3 class="class-title"><%= post.title %></h3>
                     <div class="records-sub-title"><%= post.createdAt.toLocaleDateString() %></div>
                     
                     <% if (post.imagePath) { %>
                       <div class="image-container">
                         <img 
                           src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
-                          alt="<%= post.title %>"
+                          alt="Staff profile: <%= post.title %> at David Ofoeyeno Special School"
                           class="records-article-image"
                           onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
                         >
@@ -83,9 +100,50 @@
                     </form>
                   </div>
                 <% } %>
-              </div>
+              </article>
             <% }) %>
           </div>
+
+          <!-- Schema Markup for Articles -->
+          <script type="application/ld+json">
+          {
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "itemListElement": [
+                  <% posts.forEach((post, index) => { %>
+                  {
+                      "@type": "Article",
+                      "position": <%= index + 1 %>,
+                      "name": "<%= post.title %>",
+                      "url": "https://davidofoeyenospecialschool.com/staffs/<%= post.slug %>",
+                      "image": "<%= post.imagePath ? 'https://storage.googleapis.com/' + bucketName + '/' + post.imagePath : '' %>",
+                      "description": "<%= post.description %>",
+                      "datePublished": "<%= post.createdAt.toISOString() %>",
+                      "author": {
+                          "@type": "Organization",
+                          "name": "David Ofoeyeno Special School"
+                      },
+                      "publisher": {
+                          "@type": "Organization",
+                          "name": "David Ofoeyeno Special School",
+                          "logo": {
+                              "@type": "ImageObject",
+                              "url": "https://storage.googleapis.com/<%= bucketName %>/direct/logo.jpg"
+                          }
+                      },
+                      "address": {
+                          "@type": "PostalAddress",
+                          "streetAddress": "Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive Dsc Township Orhuwhorun, Behind Challenge Academy",
+                          "addressLocality": "Warri",
+                          "addressRegion": "Delta State",
+                          "postalCode": "320242",
+                          "addressCountry": "Nigeria"
+                      }
+                  }<%= index < posts.length - 1 ? ',' : '' %>
+                  <% }) %>
+              ]
+          }
+          </script>
         </div>
         
         <%- include('../partials/footer.ejs') %>
@@ -120,7 +178,7 @@
               });
           });
           
-          window.addEventListener('resize', function() {
+          document.addEventListener('resize', function() {
               closeDropdowns();
           });
           

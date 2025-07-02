@@ -1,68 +1,107 @@
 <!-- views/autism/show.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: article.title }) %>
+    <%- include('../partials/head.ejs', { 
+        title: article.title + ' - David Ofoeyeno Special School', 
+        description: article.description || 'Learn about autism awareness events at David Ofoeyeno Special School, supporting children with neurological disorders in Warri, Delta State.' 
+    }) %>
 
     <body>
       <%- include('../partials/nav.ejs') %>
        <h1 class="new-head"><%= article.title %></h1>
        <div>
         <%= article.createdAt.toLocaleDateString() %>
-        <a href="/autism" class="all-articles">Latest Posts</a>
+        <a href="/autism" class="all-articles">Latest Autism Posts</a>
+        <a href="/activity" class="all-articles">Explore Activities</a>
         <% if (user && user.isAdmin) { %>
-          <a href="/autism/edit/<%= article.id %>" class="edit-articles"> 
-            Edit
-          </a>
+          <a href="/autism/edit/<%= article.id %>" class="edit-articles">Edit</a>
         <% } %>
        </div>
 
        <% if (article.imagePath) { %>
-        <img src="https://storage.googleapis.com/<%= bucketName %>/<%= article.imagePath %>" alt="<%= article.title %>" class="article-image">
+        <img 
+            src="https://storage.googleapis.com/<%= bucketName %>/<%= article.imagePath %>" 
+            alt="Autism event: <%= article.title %> at David Ofoeyeno Special School"
+            class="article-image"
+        >
        <% } %>
     
       <div class="article-body"><%- article.sanitizedHtml %></div> 
       
+      <!-- Schema Markup for Article -->
+      <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "<%= article.title %>",
+          "url": "https://davidofoeyenospecialschool.com/autism/<%= article.slug %>",
+          "image": "<%= article.imagePath ? 'https://storage.googleapis.com/' + bucketName + '/' + article.imagePath : '' %>",
+          "description": "<%= article.description %>",
+          "datePublished": "<%= article.createdAt.toISOString() %>",
+          "author": {
+              "@type": "Organization",
+              "name": "David Ofoeyeno Special School"
+          },
+          "publisher": {
+              "@type": "Organization",
+              "name": "David Ofoeyeno Special School",
+              "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg"
+              }
+          },
+          "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive Dsc Township Orhuwhorun, Behind Challenge Academy",
+              "addressLocality": "Warri",
+              "addressRegion": "Delta State",
+              "postalCode": "320242",
+              "addressCountry": "Nigeria"
+          }
+      }
+      </script>
+      
       <%- include('../partials/footer.ejs') %>
 
-    <script>
-      function toggleMobileMenu(menu) {
-        var isOpen = menu.classList.toggle('open');
-        if (!isOpen) {
-          closeDropdowns();
+      <script>
+        function toggleMobileMenu(menu) {
+          var isOpen = menu.classList.toggle('open');
+          if (!isOpen) {
+            closeDropdowns();
+          }
         }
-      }
-      
-      function toggleDropdown(event) {
-        event.stopPropagation();
-        var parentListItem = event.target.parentElement;
-        parentListItem.classList.toggle('open');
-      }
-      
-      function closeDropdowns() {
-        var dropdowns = document.querySelectorAll('.has-dropdown');
-        dropdowns.forEach(function(dropdown) {
-          dropdown.classList.remove('open');
-        });
-      }
-      
-      document.addEventListener('click', function(event) {
-        var dropdowns = document.querySelectorAll('.has-dropdown');
-        dropdowns.forEach(function(dropdown) {
-          if (!dropdown.contains(event.target)) {
+        
+        function toggleDropdown(event) {
+          event.stopPropagation();
+          var parentListItem = event.target.parentElement;
+          parentListItem.classList.toggle('open');
+        }
+        
+        function closeDropdowns() {
+          var dropdowns = document.querySelectorAll('.has-dropdown');
+          dropdowns.forEach(function(dropdown) {
             dropdown.classList.remove('open');
+          });
+        }
+        
+        document.addEventListener('click', function(event) {
+          var dropdowns = document.querySelectorAll('.has-dropdown');
+          dropdowns.forEach(function(dropdown) {
+            if (!dropdown.contains(event.target)) {
+              dropdown.classList.remove('open');
+            }
+          });
+        });
+        
+        window.addEventListener('resize', function() {
+          closeDropdowns();
+        });
+        
+        document.getElementById('ham-icon').addEventListener('click', function(event) {
+          if (!event.currentTarget.classList.contains('open')) {
+            closeDropdowns();
           }
         });
-      });
-      
-      window.addEventListener('resize', function() {
-        closeDropdowns();
-      });
-      
-      document.getElementById('ham-icon').addEventListener('click', function(event) {
-        if (!event.currentTarget.classList.contains('open')) {
-          closeDropdowns();
-        }
-      });
-    </script>
+      </script>
     </body>
 </html>

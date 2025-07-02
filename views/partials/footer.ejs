@@ -1,6 +1,44 @@
-<div class="footer">
-    <p>CDOSSC, David Ofoeyeno School For Special Chridren With Autism and  Neurological Disorder</p><br>
-   <p>2024 | ALL RIGTHS RESERVED|
-    WEBDESIGN BY Kelz </p>
+<!-- views/partials/footer.ejs -->
+<footer class="footer">
+  <div class="footer-content">
+    <h3>Contact Us</h3>
+    <address>
+      <p>
+        David Ofoeyeno Special School<br>
+        Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive,<br>
+        Dsc Township Orhuwhorun, Behind Challenge Academy,<br>
+        Near Warri, Delta State, Nigeria
+      </p>
+      <p>
+        <a href="tel:+2348162144476">Phone: +2348162144476</a><br>
+        <a href="mailto:ofoeyenoautismschool@yahoo.com">Email: ofoeyenoautismschool@yahoo.com</a><br>
+        <a href="https://web.facebook.com/p/Comrade-David-Ofoeyeno-School-For-Special-Children-100048106376007/" target="_blank" rel="noopener">Facebook</a>
+      </p>
+    </address>
+    <p>
+      &copy; 2025 David Ofoeyeno School for Special Children with Autism and Neurological Disorders | All Rights Reserved | Web Design by Kelz
+    </p>
+  </div>
 
-</div>
+  <!-- Schema Markup for LocalBusiness -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "David Ofoeyeno Special School",
+      "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive, Dsc Township Orhuwhorun, Behind Challenge Academy",
+          "addressLocality": "Warri",
+          "addressRegion": "Delta State",
+          "postalCode": "320242",
+          "addressCountry": "Nigeria"
+      },
+      "telephone": "+2348162144476",
+      "email": "ofoeyenoautismschool@yahoo.com",
+      "url": "https://davidofoeyenospecialschool.com",
+      "logo": "https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg",
+      "description": "David Ofoeyeno Special School in Warri, Delta State, provides specialized education and support for children with autism and neurological disorders."
+  }
+  </script>
+</footer>

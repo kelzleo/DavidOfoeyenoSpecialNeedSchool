@@ -1,10 +1,30 @@
 <div class="carousel">
     <div class="carousel-slide">
-        <img src="https://storage.googleapis.com/<%= bucketName %>/direct/b41.jpg" alt="God's plan">
+        <img src="https://storage.googleapis.com/<%= bucketName %>/direct/b41.jpg"  alt="David Ofoeyeno Special School autism awareness event" >
     </div>
     
     <div class="carousel-slide">
-        <img src="https://storage.googleapis.com/<%= bucketName %>/direct/b33.jpg" alt="one dance">
+        <img src="https://storage.googleapis.com/<%= bucketName %>/direct/b33.jpg"  alt="Children at David Ofoeyeno Special School engaging in activities" ">
     </div>
   </div>
-  
+  <!-- Optional: Schema Markup for Carousel -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "David Ofoeyeno Special School Activities",
+    "url": "https://davidofoeyenospecialschool.com/activity",
+    "image": [
+        {
+            "@type": "ImageObject",
+            "url": "https://storage.googleapis.com/<%= bucketName %>/direct/b41.jpg",
+            "caption": "Autism awareness event at David Ofoeyeno Special School"
+        },
+        {
+            "@type": "ImageObject",
+            "url": "https://storage.googleapis.com/<%= bucketName %>/direct/b33.jpg",
+            "caption": "Children engaging in activities at David Ofoeyeno Special School"
+        }
+    ]
+}
+</script>

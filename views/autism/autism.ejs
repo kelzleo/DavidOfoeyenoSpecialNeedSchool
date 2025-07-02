@@ -1,23 +1,24 @@
 <!-- views/autism/autism.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: 'Autism Day' }) %>
+    <%- include('../partials/head.ejs', { 
+        title: 'Autism Acceptance Day - David Ofoeyeno Special School', 
+        description: 'Join David Ofoeyeno Special School in celebrating Autism Acceptance Day to promote awareness and inclusion for children with autism spectrum disorder in Warri, Delta State.' 
+    }) %>
     <body>
         <%- include('../partials/nav.ejs') %>
 
         <div class="aut-wrap">
             <div class="aut-first">
-                <h1>Autism Day</h1>
-                <p>Welcome to CDOSSC Autism Acceptance Day celebration!</p>
+                <h1>Autism Acceptance Day</h1>
+                <p>Welcome to David Ofoeyeno Special School’s Autism Acceptance Day celebration, dedicated to supporting children with autism spectrum disorder (ASD) in Warri, Delta State.</p>
             </div>
         </div>
 
         <div class="aut-2nd">
-            <h1>Autism Day at CDOSSC</h1>
-            <p>This special day is dedicated to raising awareness, fostering understanding, and promoting acceptance of individuals with 
-               autism spectrum disorder (ASD). At CDOSSC, we believe in creating an inclusive environment
-               that celebrates the unique strengths and talents of every student. Join us as we embark on a 
-               journey of acceptance, appreciation, and advocacy for the autism community.
+            <h2>Autism Awareness at Our School</h2>
+            <p>
+                At <a href="/">David Ofoeyeno Special School</a>, we celebrate Autism Acceptance Day to raise awareness, foster understanding, and promote inclusion for individuals with autism spectrum disorder (ASD). Our inclusive environment in Warri, Delta State, celebrates the unique strengths and talents of every student. Join us in advocating for autism education and support. Explore our <a href="/activity">activities</a> to see how we engage our students.
             </p>
         </div>
 
@@ -28,18 +29,18 @@
         
             <div class="posts-grid">
               <% posts.forEach(post => { %>
-                <div class="card">
+                <article class="card">
                   <!-- Clickable area (card content) -->
                   <a href="/autism/<%= post.slug %>" class="card-link">
                     <div class="card-body">
-                      <h4 class="class-title"><%= post.title %></h4>
+                      <h3 class="class-title"><%= post.title %></h3>
                       <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
                       
                       <% if (post.imagePath) { %>
                         <div class="image-container">
                           <img 
                             src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
-                            alt="<%= post.title %>"
+                            alt="Autism event: <%= post.title %> at David Ofoeyeno Special School"
                             class="article-image"
                             onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
                           >
@@ -69,9 +70,42 @@
                       </form>
                     </div>
                   <% } %>
-                </div>
+                </article>
               <% }) %>
             </div>
+
+            <!-- Schema Markup for Articles -->
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "itemListElement": [
+                    <% posts.forEach((post, index) => { %>
+                    {
+                        "@type": "Article",
+                        "position": <%= index + 1 %>,
+                        "name": "<%= post.title %>",
+                        "url": "https://davidofoeyenospecialschool.com/autism/<%= post.slug %>",
+                        "image": "<%= post.imagePath ? 'https://storage.googleapis.com/' + bucketName + '/' + post.imagePath : '' %>",
+                        "description": "<%= post.description %>",
+                        "datePublished": "<%= post.createdAt.toISOString() %>",
+                        "author": {
+                            "@type": "Organization",
+                            "name": "David Ofoeyeno Special School"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "David Ofoeyeno Special School",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg"
+                            }
+                        }
+                    }<%= index < posts.length - 1 ? ',' : '' %>
+                    <% }) %>
+                ]
+            }
+            </script>
         </div>
         
         <%- include('../partials/footer.ejs') %>

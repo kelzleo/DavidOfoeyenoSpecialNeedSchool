@@ -1,7 +1,10 @@
 <!-- views/academics/academics.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: 'Academics' }) %>
+    <%- include('../partials/head.ejs', { 
+        title: 'Special Needs Education - David Ofoeyeno Special School', 
+        description: 'Discover the specialized academic programs at David Ofoeyeno Special School in Warri, Delta State, designed to support children with autism and neurological disorders.' 
+    }) %>
 
     <body>
         <%- include('../partials/nav.ejs') %>
@@ -11,44 +14,62 @@
         </div>
 
         <div class="aca-first">
-            <h1>Academics</h1>
-            <p>We are dedicated to guiding students in unlocking their personal and educational capabilities, fostering their role as esteemed participants in both family and community spheres.</p>
+            <h1>Special Needs Education</h1>
+            <p>
+                At <a href="/">David Ofoeyeno Special School</a> in Warri, Delta State, we are dedicated to guiding students with autism and neurological disorders in unlocking their personal and educational capabilities. Our tailored academic programs foster their role as valued participants in both family and community spheres. Explore our <a href="/activity">activities</a> and <a href="/about">about</a> pages to learn more.
+            </p>
         </div>
 
         <div class="kelz-images">
             <div class="kelz-home">
-                <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/b39.jpg" alt="$ome $exy $ongs">
+                <img 
+                    class="kelz-2home" 
+                    src="https://storage.googleapis.com/<%= bucketName %>/direct/b39.jpg" 
+                    alt="Students learning at David Ofoeyeno Special School"
+                >
             </div>
             <div class="kelz-home">
-                <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/t2.jpg" alt="family matters">
+                <img 
+                    class="kelz-2home" 
+                    src="https://storage.googleapis.com/<%= bucketName %>/direct/t2.jpg" 
+                    alt="Special needs education at David Ofoeyeno Special School"
+                >
             </div>
             <div class="kelz-home">
-                <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/m4.jpg" alt="the 6">
+                <img 
+                    class="kelz-2home" 
+                    src="https://storage.googleapis.com/<%= bucketName %>/direct/m4.jpg" 
+                    alt="Classroom activities at David Ofoeyeno Special School"
+                >
             </div>
             <div class="kelz-home">
-               <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/A11.jpg" alt="drake fan website">
+                <img 
+                    class="kelz-2home" 
+                    src="https://storage.googleapis.com/<%= bucketName %>/direct/A11.jpg" 
+                    alt="Inclusive education at David Ofoeyeno Special School"
+                >
             </div>
         </div>
 
         <div class="container">
             <% if (user && user.isAdmin) { %>
-                <a href="/academics/new" class="btn">New Academics post</a>
+                <a href="/academics/new" class="btn">New Academics Post</a>
             <% } %>
         
             <div class="posts-grid">
                 <% posts.forEach(post => { %>
-                    <div class="card">
+                    <article class="card">
                         <!-- Clickable area (card content) -->
                         <a href="/academics/<%= post.slug %>" class="card-link">
                             <div class="card-body">
-                                <h4 class="class-title"><%= post.title %></h4>
+                                <h3 class="class-title"><%= post.title %></h3>
                                 <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
                                 
                                 <% if (post.imagePath) { %>
                                     <div class="image-container">
                                         <img 
                                             src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
-                                            alt="<%= post.title %>"
+                                            alt="Academic program: <%= post.title %> at David Ofoeyeno Special School"
                                             class="article-image"
                                             onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
                                         >
@@ -78,9 +99,50 @@
                                 </form>
                             </div>
                         <% } %>
-                    </div>
+                    </article>
                 <% }) %>
             </div>
+
+            <!-- Schema Markup for Articles -->
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "itemListElement": [
+                    <% posts.forEach((post, index) => { %>
+                    {
+                        "@type": "Article",
+                        "position": <%= index + 1 %>,
+                        "name": "<%= post.title %>",
+                        "url": "https://davidofoeyenospecialschool.com/academics/<%= post.slug %>",
+                        "image": "<%= post.imagePath ? 'https://storage.googleapis.com/' + bucketName + '/' + post.imagePath : '' %>",
+                        "description": "<%= post.description %>",
+                        "datePublished": "<%= post.createdAt.toISOString() %>",
+                        "author": {
+                            "@type": "Organization",
+                            "name": "David Ofoeyeno Special School"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "David Ofoeyeno Special School",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg"
+                            }
+                        },
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive Dsc Township Orhuwhorun, Behind Challenge Academy",
+                            "addressLocality": "Warri",
+                            "addressRegion": "Delta State",
+                            "postalCode": "320242",
+                            "addressCountry": "Nigeria"
+                        }
+                    }<%= index < posts.length - 1 ? ',' : '' %>
+                    <% }) %>
+                ]
+            }
+            </script>
         </div>
         
         <%- include('../partials/footer.ejs') %>

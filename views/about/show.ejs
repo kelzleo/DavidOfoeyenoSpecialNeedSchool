@@ -1,32 +1,72 @@
 <!-- views/about/show.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: article.title }) %>
+    <%- include('../partials/head.ejs', { 
+        title: article.title + ' - David Ofoeyeno Special School', 
+        description: article.description || 'Learn more about David Ofoeyeno Special School in Warri, Delta State, and our mission to support children with autism and neurological disorders.' 
+    }) %>
     <body>
       <%- include('../partials/nav.ejs') %>
        <h1 class="new-head"><%= article.title %></h1>
-       <div><%= article.createdAt.toLocaleDateString() %>
-        <a href="/about" class="all-articles">Latest Posts</a>
+       <div>
+        <%= article.createdAt.toLocaleDateString() %>
+        <a href="/about" class="all-articles">Latest About Posts</a>
+        <a href="/academics" class="all-articles">Academic Programs</a>
         <% if (user && user.isAdmin) { %>
-          <a href="/about/edit/<%= article.id %>" class="edit-articles"> 
-            Edit
-          </a>
+          <a href="/about/edit/<%= article.id %>" class="edit-articles">Edit</a>
         <% } %>
        </div>
 
        <% if (article.imagePath) { %>
-        <img src="https://storage.googleapis.com/<%= bucketName %>/<%= article.imagePath %>" alt="<%= article.title %>" class="article-image">
+        <img 
+            src="https://storage.googleapis.com/<%= bucketName %>/<%= article.imagePath %>" 
+            alt="About: <%= article.title %> at David Ofoeyeno Special School"
+            class="article-image"
+        >
        <% } %>
     
       <div class="article-body"><%- article.sanitizedHtml %></div> 
      
+      <!-- Schema Markup for Article -->
+      <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "<%= article.title %>",
+          "url": "https://davidofoeyenospecialschool.com/about/<%= article.slug %>",
+          "image": "<%= article.imagePath ? 'https://storage.googleapis.com/' + bucketName + '/' + article.imagePath : '' %>",
+          "description": "<%= article.description %>",
+          "datePublished": "<%= article.createdAt.toISOString() %>",
+          "author": {
+              "@type": "Organization",
+              "name": "David Ofoeyeno Special School"
+          },
+          "publisher": {
+              "@type": "Organization",
+              "name": "David Ofoeyeno Special School",
+              "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg"
+              }
+          },
+          "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive Dsc Township Orhuwhorun, Behind Challenge Academy",
+              "addressLocality": "Warri",
+              "addressRegion": "Delta State",
+              "postalCode": "320242",
+              "addressCountry": "Nigeria"
+          }
+      }
+      </script>
+      
       <%- include('../partials/footer.ejs') %>
 
       <script>
         function toggleMobileMenu(menu) {
           var isOpen = menu.classList.toggle('open');
           if (!isOpen) {
-            closeDropdowns(); // Close dropdowns when menu is closed
+            closeDropdowns();
           }
         }
         
@@ -52,7 +92,7 @@
           });
         });
         
-        window.addEventListener('resize', function() {
+        document.addEventListener('resize', function() {
           closeDropdowns();
         });
         
