@@ -310,6 +310,16 @@
     
       
     }
+    h3{
+       font-family: "Roboto Slab", serif !important;
+      font-weight: bold !important;
+      color: darkred;
+      text-align: center;
+    }
+    h5{
+      text-align: center;
+      font-weight: bold;
+    }
     ul{
       font-family: "Roboto Slab", serif !important;
       font-weight: bold !important;
