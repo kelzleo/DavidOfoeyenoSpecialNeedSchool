@@ -1,16 +1,12 @@
+<!-- views/autism/edit.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: 'Edit News' }) %>
-
+    <%- include('../partials/head.ejs', { title: 'Edit Autism Post' }) %>
 
     <body>
-       <h1 class="new-head">Edit News</h1>
-
+       <h1 class="new-head">Edit Autism Post</h1>
        <form action="/autism/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-        <%- include('../partials/form-autism.ejs') %>
+        <%- include('../partials/form-autism.ejs', { article: article }) %>
       </form>
-      
-     
-
     </body>
 </html>

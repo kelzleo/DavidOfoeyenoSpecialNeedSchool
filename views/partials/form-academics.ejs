@@ -1,4 +1,5 @@
-<form action="/academics" method="POST" enctype="multipart/form-data">
+<!-- views/partials/form-academics.ejs -->
+<form action="<%= article && article.id ? `/academics/${article.id}?_method=PUT` : '/academics' %>" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Title</label>
         <input 
@@ -15,9 +16,7 @@
         <textarea 
             name="description" 
             id="description" 
-            class="form-control">
-            <%= article && article.description ? article.description : '' %>
-        </textarea>
+            class="form-control"><%= article && article.description ? article.description : '' %></textarea>
     </div>
 
     <div class="form-group">
@@ -26,17 +25,15 @@
             required 
             name="markdown" 
             id="markdown" 
-            class="form-control">
-            <%= article && article.markdown ? article.markdown : '' %>
-        </textarea>
+            class="form-control"><%= article && article.markdown ? article.markdown : '' %></textarea>
     </div>
 
     <div class="form-group">
         <label for="image">Image</label>
-        <input type="file" name="image" id="image" class="form-control" <%= article ? '' : 'required' %>>
+        <input type="file" name="image" id="image" class="form-control" <%= article && article.id ? '' : 'required' %>>
         <% if (article && article.imagePath) { %>
             <p>Current Image:</p>
-            <img src="<%= article.imagePath %>" alt="Current Image" style="max-width: 200px;">
+            <img src="https://storage.googleapis.com/<%= bucketName %>/<%= article.imagePath %>" alt="Current Image" style="max-width: 200px;">
         <% } %>
     </div>
 

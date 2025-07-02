@@ -1,150 +1,134 @@
+<!-- views/autism/autism.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs') %>
-    <Body>
+    <%- include('../partials/head.ejs', { title: 'Autism Day' }) %>
+    <body>
         <%- include('../partials/nav.ejs') %>
 
         <div class="aut-wrap">
             <div class="aut-first">
-        
                 <h1>Autism Day</h1>
-        
-                <p>Welcome to CDOSSC  Autism Acceptance Day celebration! </p>
-        
+                <p>Welcome to CDOSSC Autism Acceptance Day celebration!</p>
             </div>
-        
-        
-            </div>
+        </div>
 
-            <div class="aut-2nd">
+        <div class="aut-2nd">
+            <h1>Autism Day at CDOSSC</h1>
+            <p>This special day is dedicated to raising awareness, fostering understanding, and promoting acceptance of individuals with 
+               autism spectrum disorder (ASD). At CDOSSC, we believe in creating an inclusive environment
+               that celebrates the unique strengths and talents of every student. Join us as we embark on a 
+               journey of acceptance, appreciation, and advocacy for the autism community.
+            </p>
+        </div>
 
-                <h1>Autism Day at CDOSSC</h1>
+        <div class="container">
+            <% if (user && user.isAdmin) { %>
+              <a href="/autism/new" class="btn">New Autism Day Post</a>
+            <% } %>
         
-                <P>This special day is dedicated to raising awareness, fostering understanding, and promoting acceptance of individuals with 
-                   autism spectrum disorder (ASD). At CDOSSC, we believe in creating an inclusive environment
-                   that celebrates the unique strengths and talents of every student. Join us as we embark on a 
-                journey of acceptance, appreciation, and advocacy for the autism community.
-                </P>
-        
-            </div>
-
-            <div class="container">
-                <% if (user && user.isAdmin) { %>
-                  <a href="/autism/new" class="btn">New Autism day post</a>
-                <% } %>
-            
-                <div class="posts-grid">
-                  <% posts.forEach(post => { %>
-                    <div class="card">
-                      <!-- Clickable area (card content) -->
-                      <a href="/autism/<%= post.slug %>" class="card-link">
-                        <div class="card-body">
-                          <h4 class="class-title"><%= post.title %></h4>
-                          <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
-                          
-                          <% if (post.imagePath) { %>
-                            <div class="image-container">
-                              <img 
-                                src="/autism/image/<%= post.imagePath %>" 
-                                alt="<%= post.title %>"
-                                class="article-image"
-                                onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
-                              >
-                            </div>
-                          <% } %>
-                          
-                          <div class="class-text">
-                            <%= post.description %>
-                          </div>
-                        </div>
-                      </a>
-            
-                      <!-- Admin controls outside of the clickable area -->
-                      <% if (user && user.isAdmin) { %>
-                        <div class="btn-flex">
-                          <a href="/autism/edit/<%= post.id %>" class="Edit">
-                            Edit
-                          </a>
-                          <form 
-                            action="/autism/<%= post.id %>?_method=DELETE" 
-                            method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete this post?');"
+            <div class="posts-grid">
+              <% posts.forEach(post => { %>
+                <div class="card">
+                  <!-- Clickable area (card content) -->
+                  <a href="/autism/<%= post.slug %>" class="card-link">
+                    <div class="card-body">
+                      <h4 class="class-title"><%= post.title %></h4>
+                      <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
+                      
+                      <% if (post.imagePath) { %>
+                        <div class="image-container">
+                          <img 
+                            src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
+                            alt="<%= post.title %>"
+                            class="article-image"
+                            onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
                           >
-                            <button type="submit" class="btn-danger">
-                              Delete
-                            </button>
-                          </form>
                         </div>
                       <% } %>
+                      
+                      <div class="class-text">
+                        <%= post.description %>
+                      </div>
                     </div>
-                  <% }) %>
+                  </a>
+        
+                  <!-- Admin controls outside of the clickable area -->
+                  <% if (user && user.isAdmin) { %>
+                    <div class="btn-flex">
+                      <a href="/autism/edit/<%= post.id %>" class="Edit">
+                        Edit
+                      </a>
+                      <form 
+                        action="/autism/<%= post.id %>?_method=DELETE" 
+                        method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this post?');"
+                      >
+                        <button type="submit" class="btn-danger">
+                          Delete
+                        </button>
+                      </form>
+                    </div>
+                  <% } %>
                 </div>
-              </div>
+              <% }) %>
+            </div>
+        </div>
         
-            <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>
         
-            <script>
-              function toggleMobileMenu(menu) {
-                var isOpen = menu.classList.toggle('open');
-                if (!isOpen) {
-                  closeDropdowns(); // Close dropdowns when menu is closed
-                }
-              }
-              
-              // Function to toggle dropdown
-              function toggleDropdown(event) {
-                event.stopPropagation(); // Prevent propagation of the click event
-                var parentListItem = event.target.parentElement;
-                parentListItem.classList.toggle('open');
-              }
-              
-              // Function to close all dropdowns
-              function closeDropdowns() {
-                var dropdowns = document.querySelectorAll('.has-dropdown');
-                dropdowns.forEach(function(dropdown) {
-                  dropdown.classList.remove('open');
-                });
-              }
-              
-              // Close dropdowns when clicking outside of them
-              document.addEventListener('click', function(event) {
-                var dropdowns = document.querySelectorAll('.has-dropdown');
-                dropdowns.forEach(function(dropdown) {
-                  if (!dropdown.contains(event.target)) {
-                    dropdown.classList.remove('open');
-                  }
-                });
-              });
-              
-              // Close dropdowns when the window is resized (for responsiveness)
-              window.addEventListener('resize', function() {
-                closeDropdowns();
-              });
-              
-              // Close dropdowns when the mobile menu is closed
-              document.getElementById('ham-icon').addEventListener('click', function(event) {
-                if (!event.currentTarget.classList.contains('open')) {
-                  closeDropdowns();
-                }
-              });
-        
-              document.addEventListener("DOMContentLoaded", function () {
-          const items = document.querySelectorAll(".kelz-1");
-        
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-              } else {
-                entry.target.classList.remove("visible");
+        <script>
+          function toggleMobileMenu(menu) {
+            var isOpen = menu.classList.toggle('open');
+            if (!isOpen) {
+              closeDropdowns();
+            }
+          }
+          
+          function toggleDropdown(event) {
+            event.stopPropagation();
+            var parentListItem = event.target.parentElement;
+            parentListItem.classList.toggle('open');
+          }
+          
+          function closeDropdowns() {
+            var dropdowns = document.querySelectorAll('.has-dropdown');
+            dropdowns.forEach(function(dropdown) {
+              dropdown.classList.remove('open');
+            });
+          }
+          
+          document.addEventListener('click', function(event) {
+            var dropdowns = document.querySelectorAll('.has-dropdown');
+            dropdowns.forEach(function(dropdown) {
+              if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('open');
               }
             });
-          }, { threshold: 0.1 });
-        
-          items.forEach(item => observer.observe(item));
-        });
-            </script>
-    </Body>
+          });
+          
+          window.addEventListener('resize', function() {
+            closeDropdowns();
+          });
+          
+          document.getElementById('ham-icon').addEventListener('click', function(event) {
+            if (!event.currentTarget.classList.contains('open')) {
+              closeDropdowns();
+            }
+          });
 
-
+          document.addEventListener("DOMContentLoaded", function () {
+            const items = document.querySelectorAll(".kelz-1");
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                } else {
+                  entry.target.classList.remove("visible");
+                }
+              });
+            }, { threshold: 0.1 });
+            items.forEach(item => observer.observe(item));
+          });
+        </script>
+    </body>
 </html>

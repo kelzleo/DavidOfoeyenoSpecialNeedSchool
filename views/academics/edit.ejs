@@ -1,16 +1,12 @@
+<!-- views/academics/edit.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: 'Edit News' }) %>
-
+    <%- include('../partials/head.ejs', { title: 'Edit Academics Post' }) %>
 
     <body>
-       <h1 class="new-head">Edit News</h1>
-
-       <form action="/academics/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-        <%- include('../partials/form-academics.ejs') %>
-      </form>
-      
-     
-
+        <h1 class="new-head">Edit Academics Post</h1>
+        <form action="/academics/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <%- include('../partials/form-academics.ejs', { article: article }) %>
+        </form>
     </body>
 </html>

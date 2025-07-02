@@ -1,17 +1,19 @@
+// routes/activity.js
 const express = require('express');
 const Article = require('../models/adb');
 const router = express.Router();
 const multer = require('multer');
-const storage = require('../config/upload');
-const upload = multer({ storage });
+const { uploadFile, deleteFile } = require('../utils/cloudstorage');
 const { isAdmin } = require('../config/auth');
-const mongoose = require('mongoose');
+
+// Configure Multer to use memory storage
+const upload = multer({ storage: multer.memoryStorage() });
 
 // Routes
 router.get('/', async (req, res) => {
   try {
     const posts = await Article.find({ category: 'Activity' }).sort({ createdAt: 'desc' });
-    res.render('activity/index', { posts, user: req.user });
+    res.render('activity/activity', { title: 'Activity', posts, user: req.user });
   } catch (error) {
     console.error('Error fetching activity posts:', error);
     res.status(500).send('Internal Server Error');
@@ -20,7 +22,7 @@ router.get('/', async (req, res) => {
 
 router.get('/new', isAdmin, (req, res) => {
   res.render('activity/new', { 
-    title: 'New Activity/News Post', 
+    title: 'New Activity Post', 
     article: new Article(), 
     user: req.user 
   });
@@ -28,12 +30,17 @@ router.get('/new', isAdmin, (req, res) => {
 
 router.post('/', isAdmin, upload.single('image'), async (req, res) => {
   try {
+    let imageFileName = null;
+    if (req.file) {
+      imageFileName = await uploadFile(req.file);
+    }
+
     const article = new Article({
       title: req.body.title,
       description: req.body.description,
       markdown: req.body.markdown,
       category: 'Activity',
-      imagePath: req.file ? req.file.filename : null
+      imagePath: imageFileName,
     });
 
     await article.save();
@@ -64,7 +71,7 @@ router.get('/edit/:id', isAdmin, async (req, res) => {
     const article = await Article.findById(req.params.id);
     res.render('activity/edit', { article, user: req.user });
   } catch (error) {
-    console.error('Error fetching activity post:', error);
+    console.error('Error fetching activity post for editing:', error);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -75,25 +82,19 @@ router.put('/:id', isAdmin, upload.single('image'), async (req, res) => {
     article.title = req.body.title;
     article.description = req.body.description;
     article.markdown = req.body.markdown;
-    
+
     if (req.file) {
-      // Delete old image if exists
       if (article.imagePath) {
-        const gfs = req.app.locals.gfs;
-        try {
-          const files = await gfs.files.deleteOne({ filename: article.imagePath });
-          console.log('Old file deleted:', files);
-        } catch (err) {
-          console.error('Error deleting old image:', err);
-        }
+        await deleteFile(article.imagePath);
       }
-      article.imagePath = req.file.filename;
+      const newImageFileName = await uploadFile(req.file);
+      article.imagePath = newImageFileName;
     }
 
     await article.save();
     res.redirect(`/activity/${article.slug}`);
   } catch (error) {
-    console.error('Error updating discography post:', error);
+    console.error('Error updating activity post:', error);
     res.render('activity/edit', { 
       article: req.body, 
       user: req.user,
@@ -106,31 +107,13 @@ router.delete('/:id', isAdmin, async (req, res) => {
   try {
     const article = await Article.findById(req.params.id);
     if (article.imagePath) {
-      const gfs = req.app.locals.gfs;
-      await gfs.files.deleteOne({ filename: article.imagePath });
+      await deleteFile(article.imagePath);
     }
     await Article.findByIdAndDelete(req.params.id);
     res.redirect('/activity');
   } catch (error) {
     console.error('Error deleting activity post:', error);
     res.status(500).send('Internal Server Error');
-  }
-});
-
-router.get('/image/:filename', async (req, res) => {
-  try {
-    const gfs = req.app.locals.gfs;
-    const file = await gfs.files.findOne({ filename: req.params.filename });
-    
-    if (!file || file.length === 0) {
-      return res.status(404).send('File not found');
-    }
-
-    const readstream = gfs.createReadStream(file.filename);
-    readstream.pipe(res);
-  } catch (error) {
-    console.error('Error retrieving image:', error);
-    res.status(500).send('Error retrieving image');
   }
 });
 

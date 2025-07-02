@@ -1,12 +1,22 @@
 // utils/cloudStorage.js
 const { Storage } = require('@google-cloud/storage');
-const path = require('path');
 
-const storage = new Storage({
+const storageConfig = {
   projectId: process.env.GOOGLE_CLOUD_PROJECT_ID,
-  keyFilename: path.resolve(process.env.GOOGLE_CLOUD_KEYFILE_PATH),
-});
+};
 
+// Use Base64-encoded credentials if provided
+if (process.env.GOOGLE_CLOUD_CREDENTIALS) {
+  try {
+    storageConfig.credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_CREDENTIALS, 'base64').toString('utf8'));
+  } catch (err) {
+    console.error('Error parsing GOOGLE_CLOUD_CREDENTIALS:', err);
+  }
+} else {
+  console.error('GOOGLE_CLOUD_CREDENTIALS is not set');
+}
+
+const storage = new Storage(storageConfig);
 const bucket = storage.bucket(process.env.GOOGLE_CLOUD_BUCKET);
 
 async function uploadFile(file) {

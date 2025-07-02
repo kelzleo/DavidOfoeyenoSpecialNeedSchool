@@ -1,184 +1,170 @@
+<!-- views/academics/academics.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs') %>
+    <%- include('../partials/head.ejs', { title: 'Academics' }) %>
 
     <body>
         <%- include('../partials/nav.ejs') %>
 
         <div class="disco-first">
             <%- include('../partials/carousel.ejs') %>
-          </div>
+        </div>
 
-          <div class="aca-first">
+        <div class="aca-first">
             <h1>Academics</h1>
-            <p>  We dedicated to guiding students in unlocking their personal and educational capabilities, fostering their role as esteemed participants in both family and community spheres.</p>
+            <p>We are dedicated to guiding students in unlocking their personal and educational capabilities, fostering their role as esteemed participants in both family and community spheres.</p>
+        </div>
 
-          </div>
-
-          <div class="kelz-images">
+        <div class="kelz-images">
             <div class="kelz-home">
-                <img class="kelz-2home" src="/img/b39.jpg" alt="$ome $exy $ongs">
-     
-             </div>
-             <div class="kelz-home">
-                 <img class="kelz-2home" src="/img/t2.jpg" alt="family matters">
-             </div>
-             <div class="kelz-home">
-                 <img class="kelz-2home" src="/img/m4.jpg" alt="the 6">
-             </div>
-             <div class="kelz-home">
-                 <img class="kelz-2home" src="/img/a11.jpg" alt="drake fan website">
-             </div>
+                <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/b39.jpg" alt="$ome $exy $ongs">
             </div>
+            <div class="kelz-home">
+                <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/t2.jpg" alt="family matters">
+            </div>
+            <div class="kelz-home">
+                <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/m4.jpg" alt="the 6">
+            </div>
+            <div class="kelz-home">
+               <img class="kelz-2home" src="https://storage.googleapis.com/<%= bucketName %>/direct/A11.jpg" alt="drake fan website">
+            </div>
+        </div>
 
-
-            <div class="container">
-                <% if (user && user.isAdmin) { %>
-                  <a href="/academics/new" class="btn">New Academics post</a>
-                <% } %>
-            
-                <div class="posts-grid">
-                  <% posts.forEach(post => { %>
+        <div class="container">
+            <% if (user && user.isAdmin) { %>
+                <a href="/academics/new" class="btn">New Academics post</a>
+            <% } %>
+        
+            <div class="posts-grid">
+                <% posts.forEach(post => { %>
                     <div class="card">
-                      <!-- Clickable area (card content) -->
-                      <a href="/academics/<%= post.slug %>" class="card-link">
-                        <div class="card-body">
-                          <h4 class="class-title"><%= post.title %></h4>
-                          <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
-                          
-                          <% if (post.imagePath) { %>
-                            <div class="image-container">
-                              <img 
-                                src="/academics/image/<%= post.imagePath %>" 
-                                alt="<%= post.title %>"
-                                class="article-image"
-                                onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
-                              >
+                        <!-- Clickable area (card content) -->
+                        <a href="/academics/<%= post.slug %>" class="card-link">
+                            <div class="card-body">
+                                <h4 class="class-title"><%= post.title %></h4>
+                                <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
+                                
+                                <% if (post.imagePath) { %>
+                                    <div class="image-container">
+                                        <img 
+                                            src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
+                                            alt="<%= post.title %>"
+                                            class="article-image"
+                                            onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
+                                        >
+                                    </div>
+                                <% } %>
+                                
+                                <div class="class-text">
+                                    <%= post.description %>
+                                </div>
                             </div>
-                          <% } %>
-                          
-                          <div class="class-text">
-                            <%= post.description %>
-                          </div>
-                        </div>
-                      </a>
-            
-                      <!-- Admin controls outside of the clickable area -->
-                      <% if (user && user.isAdmin) { %>
-                        <div class="btn-flex">
-                          <a href="/academics/edit/<%= post.id %>" class="Edit">
-                            Edit
-                          </a>
-                          <form 
-                            action="/academics/<%= post.id %>?_method=DELETE" 
-                            method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete this post?');"
-                          >
-                            <button type="submit" class="btn-danger">
-                              Delete
-                            </button>
-                          </form>
-                        </div>
-                      <% } %>
+                        </a>
+        
+                        <!-- Admin controls outside of the clickable area -->
+                        <% if (user && user.isAdmin) { %>
+                            <div class="btn-flex">
+                                <a href="/academics/edit/<%= post.id %>" class="Edit">
+                                    Edit
+                                </a>
+                                <form 
+                                    action="/academics/<%= post.id %>?_method=DELETE" 
+                                    method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this post?');"
+                                >
+                                    <button type="submit" class="btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        <% } %>
                     </div>
-                  <% }) %>
-                </div>
-              </div>
+                <% }) %>
+            </div>
+        </div>
         
-            <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>
         
-            <script>
-                function toggleMobileMenu(menu) {
-                  var isOpen = menu.classList.toggle('open');
-                  if (!isOpen) {
-                      closeDropdowns(); // Close dropdowns when menu is closed
-                  }
-                }
-                
-                // Function to toggle dropdown
-                function toggleDropdown(event) {
-                    event.stopPropagation(); // Prevent propagation of the click event
-                    var parentListItem = event.target.parentElement;
-                    parentListItem.classList.toggle('open');
-                }
-                
-                // Function to close all dropdowns
-                function closeDropdowns() {
-                    var dropdowns = document.querySelectorAll('.has-dropdown');
-                    dropdowns.forEach(function(dropdown) {
-                        dropdown.classList.remove('open');
-                    });
-                }
-                
-                // Close dropdowns when clicking outside of them
-                document.addEventListener('click', function(event) {
-                    var dropdowns = document.querySelectorAll('.has-dropdown');
-                    dropdowns.forEach(function(dropdown) {
-                        if (!dropdown.contains(event.target)) {
-                            dropdown.classList.remove('open');
-                        }
-                    });
-                });
-                
-                // Close dropdowns when the window is resized (for responsiveness)
-                window.addEventListener('resize', function() {
+        <script>
+            function toggleMobileMenu(menu) {
+                var isOpen = menu.classList.toggle('open');
+                if (!isOpen) {
                     closeDropdowns();
+                }
+            }
+            
+            function toggleDropdown(event) {
+                event.stopPropagation();
+                var parentListItem = event.target.parentElement;
+                parentListItem.classList.toggle('open');
+            }
+            
+            function closeDropdowns() {
+                var dropdowns = document.querySelectorAll('.has-dropdown');
+                dropdowns.forEach(function(dropdown) {
+                    dropdown.classList.remove('open');
                 });
-                
-                // Close dropdowns when the mobile menu is closed
-                document.getElementById('ham-icon').addEventListener('click', function(event) {
-                    if (!event.currentTarget.classList.contains('open')) {
-                        closeDropdowns();
+            }
+            
+            document.addEventListener('click', function(event) {
+                var dropdowns = document.querySelectorAll('.has-dropdown');
+                dropdowns.forEach(function(dropdown) {
+                    if (!dropdown.contains(event.target)) {
+                        dropdown.classList.remove('open');
                     }
                 });
+            });
             
-                document.addEventListener('DOMContentLoaded', function() {
-                  const slides = document.querySelectorAll('.carousel-slide');
-                  let currentSlide = 0;
+            window.addEventListener('resize', function() {
+                closeDropdowns();
+            });
             
-                  function showSlide(n) {
-                      slides[currentSlide].classList.remove('active');
-                      slides[currentSlide].classList.add('prev');
-                      
-                      currentSlide = (n + slides.length) % slides.length;
-                      
-                      slides[currentSlide].classList.remove('prev');
-                      slides[currentSlide].classList.add('next');
-                      
-                      setTimeout(() => {
-                          slides[currentSlide].classList.remove('next');
-                          slides[currentSlide].classList.add('active');
-                      }, 50); // Slight delay to ensure transition takes effect
-                  }
-            
-                  function autoAdvance() {
-                      showSlide(currentSlide + 1);
-                  }
-            
-                  // Show the initial slide
-                  slides[currentSlide].classList.add('active');
-            
-                  // Auto-advance slides every 3 seconds
-                  setInterval(autoAdvance, 3000); // Change the interval as needed
-                });
+            document.getElementById('ham-icon').addEventListener('click', function(event) {
+                if (!event.currentTarget.classList.contains('open')) {
+                    closeDropdowns();
+                }
+            });
+        
+            document.addEventListener('DOMContentLoaded', function() {
+                const slides = document.querySelectorAll('.carousel-slide');
+                let currentSlide = 0;
+        
+                function showSlide(n) {
+                    slides[currentSlide].classList.remove('active');
+                    slides[currentSlide].classList.add('prev');
+                    
+                    currentSlide = (n + slides.length) % slides.length;
+                    
+                    slides[currentSlide].classList.remove('prev');
+                    slides[currentSlide].classList.add('next');
+                    
+                    setTimeout(() => {
+                        slides[currentSlide].classList.remove('next');
+                        slides[currentSlide].classList.add('active');
+                    }, 50);
+                }
+        
+                function autoAdvance() {
+                    showSlide(currentSlide + 1);
+                }
+        
+                slides[currentSlide].classList.add('active');
+                setInterval(autoAdvance, 3000);
+            });
 
-                document.addEventListener("DOMContentLoaded", function () {
-  const items = document.querySelectorAll(".kelz-home");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      } else {
-        entry.target.classList.remove("visible");
-      }
-    });
-  }, { threshold: 0.1 });
-
-  items.forEach(item => observer.observe(item));
-});
-            </script>
-
-
+            document.addEventListener("DOMContentLoaded", function () {
+                const items = document.querySelectorAll(".kelz-home");
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                        } else {
+                            entry.target.classList.remove("visible");
+                        }
+                    });
+                }, { threshold: 0.1 });
+                items.forEach(item => observer.observe(item));
+            });
+        </script>
     </body>
 </html>

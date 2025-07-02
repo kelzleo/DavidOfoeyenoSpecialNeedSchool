@@ -1,65 +1,50 @@
+<!-- views/staffs/staffs.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs') %>
+    <%- include('../partials/head.ejs', { title: 'Staffs' }) %>
 
     <body>
         <%- include('../partials/nav.ejs') %>
 
         <div class="records-first">
-            <h2>Meet Our Dedicated staff</h2>
-
+            <h2>Meet Our Dedicated Staff</h2>
             <p>At the Comrade David Ofoeyeno School for Special Children with Neurological Disorders, our team of passionate and dedicated professionals is committed to providing exceptional care and support for our students. Each member of our staff brings unique skills, experiences, and compassion to our community, creating a nurturing environment where every child can thrive.</p>
-
             <h2>24 Hours Service</h2>
-
-            <p>Our Staff but teach and non teaching ensure the children are looked after and cared for 24 hours of the day. They are also taught different task to enable develop their skills and ability</p>
-
+            <p>Our staff, both teaching and non-teaching, ensure the children are looked after and cared for 24 hours a day. They are also taught different tasks to enable the development of their skills and abilities.</p>
         </div>
-
 
         <div class="record-2nd">
             <div class="record-2ndpic">
-                <img src="/img/st1.JPG" alt="ovo">
+                <img src="https://storage.googleapis.com/<%= bucketName %>/direct/st1.jpg" alt="ovo">
             </div>
             <div class="record-2ndpic">
-                <img src="/img/b19.JPG" alt="drake spotify record">
+                <img src="https://storage.googleapis.com/<%= bucketName %>/direct/b19.jpg" alt="drake spotify record">
             </div>
         </div>
 
-
         <section class="hero-rec">
-          <!-- Example central image (replace with your own) -->
-          <img class="hero-img" src="/img/logo.jpg" alt="Drake fan website" />
-      
+          <img class="hero-img" src="https://storage.googleapis.com/<%= bucketName %>/direct/logo.jpg" alt="Drake fan website" />
           <h1 class="hero-heading">
             <span>Well</span>
-            <span>Expereinced</span>
+            <span>Experienced</span>
             <span>And</span>
             <span>Dedicated</span>
           </h1>
-      
-         
-      
-          <!-- Wave at the bottom -->
           <div class="wave-container-rec">
-            <!-- You can change the path fill to any shape or color you like -->
             <svg viewBox="0 0 500 150" preserveAspectRatio="none">
               <path class="wave" d="M0.00,49.98 C150.00,150.00 349.98,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"></path>
             </svg>
           </div>
         </section>
 
-        
-
         <div class="records-container">
           <% if (user && user.isAdmin) { %>
-            <a href="/staffs/new" class="btn">New Discography</a>
+            <a href="/staffs/new" class="btn">New Staff Post</a>
           <% } %>
       
           <div class="records-posts-grid">
             <% posts.forEach(post => { %>
               <div class="records-card">
-                <!-- Clickable area (card content) -->
                 <a href="/staffs/<%= post.slug %>" class="card-link">
                   <div class="records-card-body">
                     <h4 class="class-title"><%= post.title %></h4>
@@ -68,7 +53,7 @@
                     <% if (post.imagePath) { %>
                       <div class="image-container">
                         <img 
-                          src="/staffs/image/<%= post.imagePath %>" 
+                          src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
                           alt="<%= post.title %>"
                           class="records-article-image"
                           onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
@@ -82,7 +67,6 @@
                   </div>
                 </a>
       
-                <!-- Admin controls outside of the clickable area -->
                 <% if (user && user.isAdmin) { %>
                   <div class="btn-flex">
                     <a href="/staffs/edit/<%= post.id %>" class="Edit">
@@ -103,23 +87,23 @@
             <% }) %>
           </div>
         </div>
-          <%- include('../partials/footer.ejs') %>
+        
+        <%- include('../partials/footer.ejs') %>
+        
         <script>
             function toggleMobileMenu(menu) {
               var isOpen = menu.classList.toggle('open');
               if (!isOpen) {
-                  closeDropdowns(); // Close dropdowns when menu is closed
+                  closeDropdowns();
               }
           }
           
-          // Function to toggle dropdown
           function toggleDropdown(event) {
-              event.stopPropagation(); // Prevent propagation of the click event
+              event.stopPropagation();
               var parentListItem = event.target.parentElement;
               parentListItem.classList.toggle('open');
           }
           
-          // Function to close all dropdowns
           function closeDropdowns() {
               var dropdowns = document.querySelectorAll('.has-dropdown');
               dropdowns.forEach(function(dropdown) {
@@ -127,7 +111,6 @@
               });
           }
           
-          // Close dropdowns when clicking outside of them
           document.addEventListener('click', function(event) {
               var dropdowns = document.querySelectorAll('.has-dropdown');
               dropdowns.forEach(function(dropdown) {
@@ -137,21 +120,15 @@
               });
           });
           
-          // Close dropdowns when the window is resized (for responsiveness)
           window.addEventListener('resize', function() {
               closeDropdowns();
           });
           
-          // Close dropdowns when the mobile menu is closed
           document.getElementById('ham-icon').addEventListener('click', function(event) {
               if (!event.currentTarget.classList.contains('open')) {
                   closeDropdowns();
               }
           });
-
-        
-
-          
-          </script>
+        </script>
     </body>
 </html>

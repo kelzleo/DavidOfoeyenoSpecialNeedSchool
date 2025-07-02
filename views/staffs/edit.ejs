@@ -1,16 +1,12 @@
+<!-- views/staffs/edit.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: 'Edit News' }) %>
-
+    <%- include('../partials/head.ejs', { title: 'Edit Staff Post' }) %>
 
     <body>
-       <h1 class="new-head">Edit News</h1>
-
+       <h1 class="new-head">Edit Staff Post</h1>
        <form action="/staffs/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-        <%- include('../partials/form-staff.ejs') %>
+        <%- include('../partials/form-staff.ejs', { article: article }) %>
       </form>
-      
-     
-
     </body>
 </html>

@@ -1,16 +1,12 @@
+<!-- views/activity/edit.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', { title: 'Edit News' }) %>
-
+    <%- include('../partials/head.ejs', { title: 'Edit Activity Post' }) %>
 
     <body>
-       <h1 class="new-head">Edit News</h1>
-
+       <h1 class="new-head">Edit Activity Post</h1>
        <form action="/activity/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-        <%- include('../partials/form-activity.ejs') %>
+        <%- include('../partials/form-activity.ejs', { article: article }) %>
       </form>
-      
-     
-
     </body>
 </html>
