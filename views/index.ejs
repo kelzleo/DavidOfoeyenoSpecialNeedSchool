@@ -1,63 +1,56 @@
-<!-- views/index.ejs -->
 <!DOCTYPE html>
-<html lang="en">
-  <%- include('./partials/head.ejs', { 
-      title: 'David Ofoeyeno Special School - Warri, Delta State', 
-      description: 'Welcome to David Ofoeyeno Special School in Warri, Delta State, a dedicated institution for children with autism and neurological disorders, offering inclusive education and support.' 
-  }) %>
-
+<html>
+  <%- include('./partials/head.ejs') %>
   <body>
     <%- include('./partials/nav.ejs') %>
 
-    <section class="hero">
-      <img 
-          class="hero-img" 
-          src="https://storage.googleapis.com/<%= bucketName %>/direct/b41.jpg" 
-          alt="David Ofoeyeno Special School in Warri, Delta State"
-      />
-      <h1 class="hero-heading">
-        <span>Disability</span>
-        <span>Is not</span>
-        <span>Inability</span>
-      </h1>
-      <div class="wave-container">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
-          <path class="wave" d="M0.00,49.98 C150.00,150.00 349.98,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"></path>
-        </svg>
+    <!-- Modern Hero Section -->
+    <section class="modern-hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Welcome to Comrade David Ofoeyeno Special School</h1>
+        <p>
+          Where every child's journey is met with compassion, dedication, and a commitment to excellence. Nestled in the heart of Udu, Delta State, our school stands as a beacon of hope and opportunity for children with neurological disorders and their families.
+        </p>
+        <a href="#about" class="hero-btn">Learn More</a>
+      </div>
+      <div class="hero-image">
+        <img src="/img/b41.jpg" alt="School Hero Image" />
       </div>
     </section>
 
-    <div class="index-first"></div>
+    <!-- Mantra Banner -->
+    <section class="mantra-banner">
+      <span>Disability is not Inability</span>
+    </section>
 
-    <div class="index-second">
-      <h2>Welcome to David Ofoeyeno Special School</h2>
-      <p>
-        Welcome to <a href="/">David Ofoeyeno Special School</a>, located in Warri, Delta State, where every child’s journey is met with compassion and excellence. Our school is a beacon of hope for children with autism and neurological disorders, offering a nurturing environment for growth.
-      </p>
-      <p>
-        Founded on inclusivity and empowerment, we honor Comrade David Ofoeyeno’s vision of resilience and education. Our school is a community dedicated to unlocking every child’s potential through specialized programs. Explore our <a href="/academics">academic programs</a> and <a href="/activity">activities</a>.
-      </p>
-      <p>
-        Our mission is to provide an inclusive environment where students thrive academically, socially, and emotionally. We foster acceptance and respect, celebrating each child’s unique abilities. Learn more about our <a href="/about">mission</a> and <a href="/staffs">dedicated staff</a>.
-      </p>
-    </div>
-
-    <div class="index-neuro">
-      <div class="index-g">
-        <h3>Our Vision</h3>
+    <!-- About / Mission Section -->
+    <section class="about-section" id="about">
+      <div class="about-content">
+        <h2>About Our School</h2>
         <p>
-          At <a href="/">David Ofoeyeno Special School</a>, we adopt a holistic approach to special needs education, using individualized learning plans and evidence-based practices to empower students in Warri, Delta State, to reach their full potential.
+          Founded on the principles of inclusivity and empowerment, Comrade David Ofoeyeno Special School is more than just an educational institution — it's a community dedicated to unlocking the full potential of every child, regardless of their challenges. Named in honor of Comrade David Ofoeyeno, a visionary leader and advocate for children with special needs, our school embodies his spirit of resilience, compassion, and unwavering belief in the power of education to transform lives.
+        </p>
+        <p>
+          Our mission is simple yet profound: to provide a nurturing and inclusive environment where each student can thrive academically, socially, and emotionally. We foster a culture of acceptance, understanding, and respect, where differences are celebrated and every child is valued for who they are.
         </p>
       </div>
-      <div class="index-g">
-        <img 
-            class="index-neuropix1" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/s9.jpg" 
-            alt="Special needs education at David Ofoeyeno Special School"
-        />
-      </div>
-    </div>
+    </section>
 
+    <!-- Vision Section -->
+    <section class="vision-section">
+      <div class="vision-text">
+        <h2>Our Vision</h2>
+        <p>
+          At our school, we believe in a holistic approach to education that recognizes the unique strengths, abilities, and challenges of each student. Through individualized learning plans, evidence-based practices, and a focus on meaningful outcomes, we empower students to reach their full potential and become active participants in their own learning journey.
+        </p>
+      </div>
+      <div class="vision-image">
+        <img src="/img/s9.jpg" alt="Students learning together">
+      </div>
+    </section>
+
+    <!-- Image Gallery Section -->
     <div class="kelz-images">
       <div class="kelz-home">
         <img 
@@ -295,31 +288,6 @@
         <% } %>
       </section>
     </div>
-
-    <section class="socials-section">
-      <h3>Social Media</h3>
-      <h5>Follow Us on Social Media!</h5>
-      <div class="socials-container">
-        <div class="social-item">
-          <a href="https://web.facebook.com/p/Comrade-David-Ofoeyeno-School-For-Special-Children-100048106376007/?_rdc=1&_rdr" target="_blank" rel="noopener">
-            <div class="social-bg">Fb</div>
-            <div class="social-name">Facebook</div>
-          </a>
-        </div>
-        <div class="social-item">
-          <a href="mailto:ofoeyenoautismschool@yahoo.com">
-            <div class="social-bg">📧</div>
-            <div class="social-name">Email</div>
-          </a>
-        </div>
-        <div class="social-item">
-          <a href="tel:+2348162144476">
-            <div class="social-bg">📞</div>
-            <div class="social-name">Call Us</div>
-          </a>
-        </div>
-      </div>
-    </section>
 
     <!-- Schema Markup for WebPage -->
     <script type="application/ld+json">
