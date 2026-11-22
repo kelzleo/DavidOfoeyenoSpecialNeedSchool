@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/top') %>
 
-  
-  <%- include('./partials/head.ejs') %>
-
-
-  <body>
-    <form action="/login" method="POST" class="login-form">
-      <h2>Login</h2>
-      <input type="text" name="usernameOrEmail" placeholder="Username or Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <button type="submit" class="button-login">Login</button>
-      <% if (errorMessage) { %>
-        <p style="color: red"><%= errorMessage %></p>
+<section class="section">
+  <div class="container container--narrow">
+    <form action="/login" method="POST" class="form form--card">
+      <h1 class="form-title">Login</h1>
+      <% if (errorMessage && errorMessage.length) { %>
+        <p class="alert alert--error" role="alert"><%= errorMessage %></p>
       <% } %>
+      <div class="form-group">
+        <label for="usernameOrEmail">Username or email</label>
+        <input type="text" name="usernameOrEmail" id="usernameOrEmail" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn--primary">Login</button>
     </form>
-  </body>
-</html>
+  </div>
+</section>
+
+<%- include('partials/bottom') %>

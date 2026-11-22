@@ -1,0 +1,10 @@
+<%
+  // locals: items [{ file, alt }] or [{ path, alt }] (path is relative to the bucket root), optional columns
+%>
+<div class="gallery<%= items.length < 4 ? ' gallery--few' : '' %><%= locals.columns === 5 ? ' gallery--5' : '' %>">
+  <% items.forEach((item) => { %>
+    <figure class="gallery__item">
+      <img src="https://storage.googleapis.com/<%= bucketName %>/<%= item.path || `direct/${item.file}` %>" alt="<%= item.alt %>" width="800" height="600" loading="lazy" decoding="async">
+    </figure>
+  <% }) %>
+</div>

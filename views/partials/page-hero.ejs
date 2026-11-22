@@ -1,0 +1,13 @@
+<%
+  // locals: heroTitle, heroIntro, heroImage (optional file in /direct/), heroAlt, heroEyebrow (optional)
+%>
+<section class="page-hero<%= locals.heroImage ? ' page-hero--image' : '' %>">
+  <% if (locals.heroImage) { %>
+    <img class="page-hero__img" src="https://storage.googleapis.com/<%= bucketName %>/direct/<%= heroImage %>" alt="<%= locals.heroAlt || '' %>" fetchpriority="high" decoding="async">
+  <% } %>
+  <div class="container page-hero__content">
+    <% if (locals.heroEyebrow) { %><p class="eyebrow"><%= heroEyebrow %></p><% } %>
+    <h1><%= heroTitle %></h1>
+    <% if (locals.heroIntro) { %><p class="lead"><%= heroIntro %></p><% } %>
+  </div>
+</section>

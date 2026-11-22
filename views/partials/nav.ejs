@@ -1,39 +1,29 @@
-<header>
-    <div class="brand"><a href=""><img class="logo-img" src="https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg"></a></div>
-    <nav class="main">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/activity">Activity</a></li>
-            
-            <li><a href="/about">About us</a></li>
-            <li><a href="/staffs">Staff</a></li>
-            <li><a href="/autism"> Autism Day</a></li>
-            <li><a href="/academics"> Academics</a></li>
-            
-        </ul>
+<%
+  const navLinks = [{ href: '/', label: 'Home', key: 'home' }]
+    .concat(categories.map((c) => ({ href: c.path, label: c.navLabel, key: c.key })));
+%>
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="brand" href="/" aria-label="David Ofoeyeno Special School - home">
+      <img src="/img/newlogo.jpg" alt="" width="44" height="42">
+      <span class="brand__name">David Ofoeyeno<small>Special School</small></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        <% navLinks.forEach((link) => { %>
+          <li>
+            <a href="<%= link.href %>" <%- locals.active === link.key ? 'aria-current="page"' : '' %>><%= link.label %></a>
+          </li>
+        <% }) %>
+      </ul>
+      <a class="btn btn--accent btn--sm" href="#contact">Contact us</a>
     </nav>
-    <div id="ham-icon" onclick="toggleMobileMenu(this)">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-        <ul class="mobile-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/activity">Activity</a></li>
-            
-            <li><a href="/about">About us</a></li>
-            <li><a href="/staffs">Staff</a></li>
-            <li><a href="/autism"> Autism Day</a></li>
-            <li><a href="/academics"> Academics</a></li>
-           
-        
-        </ul>
-  
-    </div>
-  </header>
-  
-  
-  
-  
-  
-  
-  
+  </div>
+</header>

@@ -39,6 +39,11 @@ const articleSchema = new mongoose.Schema({
   category: { 
     type: String, 
     required: true 
+  },
+  // Optional manual position within a section; lower numbers appear first, ties fall back to newest first
+  sortOrder: {
+    type: Number,
+    default: 0
   }
 });
 
