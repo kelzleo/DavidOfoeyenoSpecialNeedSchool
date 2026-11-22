@@ -1,0 +1,52 @@
+<%- include('../partials/top') %>
+
+<article class="section">
+  <div class="container container--narrow">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">&rsaquo;</span>
+      <a href="<%= cfg.path %>"><%= cfg.navLabel %></a> <span aria-hidden="true">&rsaquo;</span>
+      <span aria-current="page"><%= article.title %></span>
+    </nav>
+
+    <h1 class="article__title"><%= article.title %></h1>
+    <p class="article__meta">
+      <time datetime="<%= article.createdAt.toISOString() %>"><%= article.createdAt.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
+    </p>
+
+    <% if (article.imagePath) { %>
+      <img
+        class="article__img"
+        src="https://storage.googleapis.com/<%= bucketName %>/<%= article.imagePath %>"
+        alt="<%= cfg.altPrefix %>: <%= article.title %> at David Ofoeyeno Special School"
+        fetchpriority="high"
+        decoding="async">
+    <% } %>
+
+    <div class="prose"><%- article.sanitizedHtml %></div>
+
+    <div class="article__actions">
+      <a href="<%= cfg.path %>" class="btn btn--ghost">&larr; Back to <%= cfg.navLabel %></a>
+      <% if (locals.user && user.isAdmin) { %>
+        <a href="<%= cfg.path %>/edit/<%= article.id %>" class="btn btn--primary">Edit</a>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include('../partials/jsonld', { data: {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    url: `${siteUrl}${cfg.path}/${article.slug}`,
+    image: article.imagePath ? `https://storage.googleapis.com/${bucketName}/${article.imagePath}` : undefined,
+    description: article.description || undefined,
+    datePublished: article.createdAt.toISOString(),
+    author: { '@type': 'Organization', name: 'David Ofoeyeno Special School' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'David Ofoeyeno Special School',
+      logo: { '@type': 'ImageObject', url: `${siteUrl}/img/newlogo.jpg` }
+    }
+  } }) %>
+</article>
+
+<%- include('../partials/bottom') %>

@@ -1,14 +1,27 @@
+<%
+  const pageTitle = locals.title || 'David Ofoeyeno Special School';
+  const pageDescription = locals.description || 'Specialised education and care for children with autism and neurological disorders in Warri, Delta State, Nigeria.';
+  const shareImage = `${siteUrl}/img/newlogo.jpg`;
+%>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/styles.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
-  </head>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <meta name="description" content="<%= pageDescription %>">
+  <meta name="theme-color" content="#1f6f8b">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="David Ofoeyeno Special School">
+  <meta property="og:title" content="<%= pageTitle %>">
+  <meta property="og:description" content="<%= pageDescription %>">
+  <meta property="og:image" content="<%= shareImage %>">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="/img/newlogo.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/js/site.js" defer></script>
+</head>

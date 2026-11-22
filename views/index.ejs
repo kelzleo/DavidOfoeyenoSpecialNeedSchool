@@ -1,395 +1,156 @@
-<!DOCTYPE html>
-<html>
-  <%- include('./partials/head.ejs') %>
-  <body>
-    <%- include('./partials/nav.ejs') %>
+<%- include('partials/top') %>
 
-    <!-- Modern Hero Section -->
-    <section class="modern-hero">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1>Welcome to Comrade David Ofoeyeno Special School</h1>
-        <p>
-          Where every child's journey is met with compassion, dedication, and a commitment to excellence. Nestled in the heart of Udu, Delta State, our school stands as a beacon of hope and opportunity for children with neurological disorders and their families.
-        </p>
-        <a href="#about" class="hero-btn">Learn More</a>
+<section class="home-hero">
+  <div class="container home-hero__grid">
+    <div class="home-hero__text">
+      <p class="eyebrow">Warri, Delta State &bull; Autism &amp; neurological disorders</p>
+      <h1>Welcome to Comrade David Ofoeyeno Special School</h1>
+      <p class="lead">
+        Where every child’s journey is met with compassion, dedication and a commitment to excellence. Nestled in the heart of Udu, Delta State, our school is a beacon of hope and opportunity for children with neurological disorders and their families.
+      </p>
+      <div class="home-hero__actions">
+        <a href="#about" class="btn btn--accent">Learn more</a>
+        <a href="#contact" class="btn btn--outline-light">Contact us</a>
       </div>
-      <div class="hero-image">
-        <img src="/img/b41.jpg" alt="School Hero Image" />
+    </div>
+    <div class="home-hero__media">
+      <img src="/img/hero-home.jpg" alt="A teacher helping students at computers in class" width="1600" height="1069" fetchpriority="high" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="mantra" aria-label="Our motto">
+  <p>Disability is not Inability</p>
+</section>
+
+<section class="facts" aria-label="At a glance">
+  <ul class="container facts__list">
+    <li><strong>Private school</strong><span>in Warri, Delta State</span></li>
+    <li><strong>Autism &amp; neurological</strong><span>disorders supported</span></li>
+    <li><strong>Qualified staff</strong><span>teachers, therapists &amp; caregivers</span></li>
+    <li><strong>24/7 care</strong><span>in a serene, secure setting</span></li>
+  </ul>
+</section>
+
+<section class="section" id="about">
+  <div class="container split">
+    <div class="prose">
+      <h2>About our school</h2>
+      <p>
+        Founded on the principles of inclusivity and empowerment, Comrade David Ofoeyeno Special School is more than just an educational institution &mdash; it’s a community dedicated to unlocking the full potential of every child, regardless of their challenges. Named in honour of Comrade David Ofoeyeno, a visionary leader and advocate for children with special needs, our school embodies his spirit of resilience, compassion and unwavering belief in the power of education to transform lives.
+      </p>
+      <p>
+        Our mission is simple yet profound: to provide a nurturing and inclusive environment where each student can thrive academically, socially and emotionally. We foster a culture of acceptance, understanding and respect, where differences are celebrated and every child is valued for who they are.
+      </p>
+      <a href="/about" class="btn btn--primary">More about us</a>
+    </div>
+    <img class="split__img" src="/img/s9.jpg" alt="Students learning together" width="960" height="640" loading="lazy" decoding="async">
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head section__head--center">
+      <h2>Our vision</h2>
+    </div>
+    <div class="prose prose--center">
+      <p>
+        We believe in a holistic approach to education that recognises the unique strengths, abilities and challenges of each student. Through individualised learning plans, evidence-based practices and a focus on meaningful outcomes, we empower students to reach their full potential and become active participants in their own learning journey.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      <a class="feature" href="/academics">
+        <h3>Our programmes</h3>
+        <p>Tailored programmes that unlock each student’s personal and educational capabilities.</p>
+        <span class="feature__more">Explore our programmes &rarr;</span>
+      </a>
+      <a class="feature" href="/activity">
+        <h3>Activities</h3>
+        <p>Structured learning, therapy and recreation that build confidence and creativity.</p>
+        <span class="feature__more">See our activities &rarr;</span>
+      </a>
+      <a class="feature" href="/autism">
+        <h3>Autism Acceptance Day</h3>
+        <p>Raising awareness and promoting inclusion for children with autism spectrum disorder.</p>
+        <span class="feature__more">Read more &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head section__head--center">
+      <h2>Life at our school</h2>
+    </div>
+    <%- include('partials/gallery', { items: [
+      { file: 'b23.jpg', alt: 'Autism event at David Ofoeyeno Special School' },
+      { file: 's1.jpg', alt: 'Student activity at David Ofoeyeno Special School' },
+      { file: 's3.jpg', alt: 'Special needs program at David Ofoeyeno Special School' },
+      { file: 's4.jpg', alt: 'Students at David Ofoeyeno Special School' },
+      { file: 't1.jpg', alt: 'Teacher and students at David Ofoeyeno Special School' },
+      { file: 's2.jpg', alt: 'Classroom at David Ofoeyeno Special School' },
+      { file: 'A11.jpg', alt: 'Learning at David Ofoeyeno Special School' },
+      { file: 'st1.jpg', alt: 'Staff of David Ofoeyeno Special School' },
+      { path: '1751138331711_b29.jpg', alt: 'Students enjoying a music lesson at David Ofoeyeno Special School' },
+      { file: 'm4.jpg', alt: 'Students learning computer skills at David Ofoeyeno Special School' }
+    ], columns: 5 }) %>
+  </div>
+</section>
+
+<% sections.forEach((section, index) => { %>
+  <% if (section.posts.length) { %>
+    <section class="section<%= index % 2 === 0 ? ' section--alt' : '' %>">
+      <div class="container">
+        <div class="section__head">
+          <h2><%= section.cfg.navLabel === 'Staff' ? 'Our staff' : section.cfg.navLabel %></h2>
+          <a class="section__all" href="<%= section.cfg.path %>">View all &rarr;</a>
+        </div>
+        <div class="card-grid">
+          <% section.posts.forEach((post) => { %>
+            <%- include('partials/post-card', { post, cfg: section.cfg }) %>
+          <% }) %>
+        </div>
       </div>
     </section>
+  <% } %>
+<% }) %>
 
-    <!-- Mantra Banner -->
-    <section class="mantra-banner">
-      <span>Disability is not Inability</span>
-    </section>
-
-    <!-- About / Mission Section -->
-    <section class="about-section" id="about">
-      <div class="about-content">
-        <h2>About Our School</h2>
-        <p>
-          Founded on the principles of inclusivity and empowerment, Comrade David Ofoeyeno Special School is more than just an educational institution — it's a community dedicated to unlocking the full potential of every child, regardless of their challenges. Named in honor of Comrade David Ofoeyeno, a visionary leader and advocate for children with special needs, our school embodies his spirit of resilience, compassion, and unwavering belief in the power of education to transform lives.
-        </p>
-        <p>
-          Our mission is simple yet profound: to provide a nurturing and inclusive environment where each student can thrive academically, socially, and emotionally. We foster a culture of acceptance, understanding, and respect, where differences are celebrated and every child is valued for who they are.
-        </p>
-      </div>
-    </section>
-
-    <!-- Vision Section -->
-    <section class="vision-section">
-      <div class="vision-text">
-        <h2>Our Vision</h2>
-        <p>
-          At our school, we believe in a holistic approach to education that recognizes the unique strengths, abilities, and challenges of each student. Through individualized learning plans, evidence-based practices, and a focus on meaningful outcomes, we empower students to reach their full potential and become active participants in their own learning journey.
-        </p>
-      </div>
-      <div class="vision-image">
-        <img src="/img/s9.jpg" alt="Students learning together">
-      </div>
-    </section>
-
-    <!-- Image Gallery Section -->
-    <div class="kelz-images">
-      <div class="kelz-home">
-        <img 
-            class="kelz-2home" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/b23.jpg" 
-            alt="Autism event at David Ofoeyeno Special School"
-        >
-      </div>
-      <div class="kelz-home">
-        <img 
-            class="kelz-2home" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/s1.jpg" 
-            alt="Student activity at David Ofoeyeno Special School"
-        >
-      </div>
-      <div class="kelz-home">
-        <img 
-            class="kelz-2home" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/s3.jpg" 
-            alt="Special needs program at David Ofoeyeno Special School"
-        >
-      </div>
-      <div class="kelz-home">
-        <img 
-            class="kelz-2home" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/s4.jpg" 
-            alt="Inclusive education at David Ofoeyeno Special School"
-        >
-      </div>
+<section class="section">
+  <div class="container split">
+    <div class="prose">
+      <h2>Visit us</h2>
+      <p>
+        We welcome parents and guardians to come and see our school. Call or email us to arrange a visit and talk with our team about how we can support your child.
+      </p>
+      <p>
+        Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive, Dsc Township Orhuwhorun, Behind Challenge Academy, Near Warri, Delta State, Nigeria
+      </p>
+      <a href="tel:+2348162144476" class="btn btn--primary">Call +234 816 214 4476</a>
     </div>
+    <iframe
+      class="map"
+      title="Map showing the location of David Ofoeyeno Special School"
+      src="https://www.google.com/maps?q=Comrade+David+Ofoeyeno+School+Orhuwhorun+Warri+Delta+State+Nigeria&amp;output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
 
-    <div class="kelz2-images">
-      <div class="kelz-11">
-        <img 
-            class="kelz-22" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/t1.jpg" 
-            alt="Teacher supporting students at David Ofoeyeno Special School"
-        >
-      </div>
-      <div class="kelz-11">
-        <img 
-            class="kelz-22" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/s2.jpg" 
-            alt="Student support at David Ofoeyeno Special School"
-        >
-      </div>
-      <div class="kelz-11">
-        <img 
-            class="kelz-22" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/A11.jpg" 
-            alt="Academic program at David Ofoeyeno Special School"
-        >
-      </div>
-      <div class="kelz-11">
-        <img 
-            class="kelz-22" 
-            src="https://storage.googleapis.com/<%= bucketName %>/direct/st1.jpg" 
-            alt="Staff member at David Ofoeyeno Special School"
-        >
-      </div>
-    </div>
+<%- include('partials/jsonld', { data: {
+  '@context': 'https://schema.org',
+  '@type': 'School',
+  name: 'David Ofoeyeno Special School',
+  url: siteUrl,
+  logo: `${siteUrl}/img/newlogo.jpg`,
+  description: 'A private school in Warri, Delta State, supporting children with autism and neurological disorders.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Warri',
+    addressRegion: 'Delta State',
+    addressCountry: 'Nigeria'
+  }
+} }) %>
 
-    <!-- Activity Posts Section -->
-    <div class="container">
-      <section class="latest-posts">
-        <a href="/activity" style="text-decoration: none;">
-          <h1>Activities</h1>
-        </a>
-        <% if (activityPosts && activityPosts.length) { %>
-          <div class="posts-grid">
-            <% activityPosts.forEach(post => { %>
-              <article class="card">
-                <a href="/activity/<%= post.slug %>" class="card-link">
-                  <div class="card-body">
-                    <h4 class="class-title"><%= post.title %></h4>
-                    <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
-                    <% if (post.imagePath) { %>
-                      <div class="image-container">
-                        <img 
-                            src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
-                            alt="Activity: <%= post.title %> at David Ofoeyeno Special School"
-                            class="article-image"
-                            onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
-                        >
-                      </div>
-                    <% } %>
-                    <div class="class-text"><%= post.description %></div>
-                  </div>
-                </a>
-                <% if (user && user.isAdmin) { %>
-                  <div class="btn-flex">
-                    <a href="/activity/edit/<%= post.id %>" class="Edit">Edit</a>
-                    <form action="/activity/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
-                      <button type="submit" class="btn-danger">Delete</button>
-                    </form>
-                  </div>
-                <% } %>
-              </article>
-            <% }) %>
-          </div>
-        <% } else { %>
-          <p>No activity posts available yet.</p>
-        <% } %>
-      </section>
-    </div>
-
-    <!-- About Posts Section -->
-    <div class="container">
-      <section class="latest-posts">
-        <a href="/about" style="text-decoration: none;">
-          <h3>About Us</h3>
-        </a>
-        <% if (aboutPosts && aboutPosts.length) { %>
-          <div class="posts-grid">
-            <% aboutPosts.forEach(post => { %>
-              <article class="card">
-                <a href="/about/<%= post.slug %>" class="card-link">
-                  <div class="card-body">
-                    <h4 class="class-title"><%= post.title %></h4>
-                    <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
-                    <% if (post.imagePath) { %>
-                      <div class="image-container">
-                        <img 
-                            src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
-                            alt="About: <%= post.title %> at David Ofoeyeno Special School"
-                            class="article-image"
-                            onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
-                        >
-                      </div>
-                    <% } %>
-                    <div class="class-text"><%= post.description %></div>
-                  </div>
-                </a>
-                <% if (user && user.isAdmin) { %>
-                  <div class="btn-flex">
-                    <a href="/about/edit/<%= post.id %>" class="Edit">Edit</a>
-                    <form action="/about/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
-                      <button type="submit" class="btn-danger">Delete</button>
-                    </form>
-                  </div>
-                <% } %>
-              </article>
-            <% }) %>
-          </div>
-        <% } else { %>
-          <p>No about posts available yet.</p>
-        <% } %>
-      </section>
-    </div>
-
-    <!-- Academics Posts Section -->
-    <div class="container">
-      <section class="latest-posts">
-        <a href="/academics" style="text-decoration: none;">
-          <h3>Academics</h3>
-        </a>
-        <% if (academicsPosts && academicsPosts.length) { %>
-          <div class="posts-grid">
-            <% academicsPosts.forEach(post => { %>
-              <article class="card">
-                <a href="/academics/<%= post.slug %>" class="card-link">
-                  <div class="card-body">
-                    <h4 class="class-title"><%= post.title %></h4>
-                    <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
-                    <% if (post.imagePath) { %>
-                      <div class="image-container">
-                        <img 
-                            src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
-                            alt="Academic program: <%= post.title %> at David Ofoeyeno Special School"
-                            class="article-image"
-                            onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
-                        >
-                      </div>
-                    <% } %>
-                    <div class="class-text"><%= post.description %></div>
-                  </div>
-                </a>
-                <% if (user && user.isAdmin) { %>
-                  <div class="btn-flex">
-                    <a href="/academics/edit/<%= post.id %>" class="Edit">.Edit</a>
-                    <form action="/academics/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
-                      <button type="submit" class="btn-danger">Delete</button>
-                    </form>
-                  </div>
-                <% } %>
-              </article>
-            <% }) %>
-          </div>
-        <% } else { %>
-          <p>No academics posts available yet.</p>
-        <% } %>
-      </section>
-    </div>
-
-    <!-- Autism Posts Section -->
-    <div class="container">
-      <section class="latest-posts">
-        <a href="/autism" style="text-decoration: none;">
-          <h3>Autism</h3>
-        </a>
-        <% if (autismPosts && autismPosts.length) { %>
-          <div class="posts-grid">
-            <% autismPosts.forEach(post => { %>
-              <article class="card">
-                <a href="/autism/<%= post.slug %>" class="card-link">
-                  <div class="card-body">
-                    <h4 class="class-title"><%= post.title %></h4>
-                    <div class="sub-title"><%= post.createdAt.toLocaleDateString() %></div>
-                    <% if (post.imagePath) { %>
-                      <div class="image-container">
-                        <img 
-                            src="https://storage.googleapis.com/<%= bucketName %>/<%= post.imagePath %>" 
-                            alt="Autism event: <%= post.title %> at David Ofoeyeno Special School"
-                            class="article-image"
-                            onerror="this.onerror=null; this.src='/images/placeholder.jpg';"
-                        >
-                      </div>
-                    <% } %>
-                    <div class="class-text"><%= post.description %></div>
-                  </div>
-                </a>
-                <% if (user && user.isAdmin) { %>
-                  <div class="btn-flex">
-                    <a href="/autism/edit/<%= post.id %>" class="Edit">Edit</a>
-                    <form action="/autism/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
-                      <button type="submit" class="btn-danger">Delete</button>
-                    </form>
-                  </div>
-                <% } %>
-              </article>
-            <% }) %>
-          </div>
-        <% } else { %>
-          <p>No autism posts available yet.</p>
-        <% } %>
-      </section>
-    </div>
-
-    <!-- Schema Markup for WebPage -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "David Ofoeyeno Special School",
-        "url": "https://davidofoeyenospecialschool.com",
-        "description": "David Ofoeyeno Special School in Warri, Delta State, provides inclusive education and support for children with autism and neurological disorders.",
-        "publisher": {
-            "@type": "Organization",
-            "name": "David Ofoeyeno Special School",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg"
-            }
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive Dsc Township Orhuwhorun, Behind Challenge Academy",
-            "addressLocality": "Warri",
-            "addressRegion": "Delta State",
-            "postalCode": "320242",
-            "addressCountry": "Nigeria"
-        }
-    }
-    </script>
-
-    <%- include('./partials/footer.ejs') %>
-
-    <script>
-      function toggleMobileMenu(menu) {
-        var isOpen = menu.classList.toggle('open');
-        if (!isOpen) {
-          closeDropdowns();
-        }
-      }
-      
-      function toggleDropdown(event) {
-        event.stopPropagation();
-        var parentListItem = event.target.parentElement;
-        parentListItem.classList.toggle('open');
-      }
-      
-      function closeDropdowns() {
-        var dropdowns = document.querySelectorAll('.has-dropdown');
-        dropdowns.forEach(function(dropdown) {
-          dropdown.classList.remove('open');
-        });
-      }
-      
-      document.addEventListener('click', function(event) {
-        var dropdowns = document.querySelectorAll('.has-dropdown');
-        dropdowns.forEach(function(dropdown) {
-          if (!dropdown.contains(event.target)) {
-            dropdown.classList.remove('open');
-          }
-        });
-      });
-      
-      document.addEventListener('resize', function() {
-        closeDropdowns();
-      });
-      
-      document.getElementById('ham-icon').addEventListener('click', function(event) {
-        if (!event.currentTarget.classList.contains('open')) {
-          closeDropdowns();
-        }
-      });
-      
-      document.addEventListener("DOMContentLoaded", function () {
-        const items = document.querySelectorAll(".kelz-home");
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            } else {
-              entry.target.classList.remove("visible");
-            }
-          });
-        }, { threshold: 0.1 });
-        items.forEach(item => observer.observe(item));
-      });
-
-      document.addEventListener('DOMContentLoaded', function () {
-        const images = document.querySelectorAll('.kelz-22');
-        const observerOptions = {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1
-        };
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
-            } else {
-              entry.target.classList.remove('in-view');
-            }
-          });
-        }, observerOptions);
-        images.forEach(image => observer.observe(image));
-      });
-    </script>
-  </body>
-</html>
+<%- include('partials/bottom') %>

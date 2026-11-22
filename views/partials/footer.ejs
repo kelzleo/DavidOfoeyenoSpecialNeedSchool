@@ -1,67 +1,78 @@
-<footer class="footer">
-  <div class="footer-content footer-flex">
-    <div class="footer-address">
-      <h3>Contact Us</h3>
-      <address>
-        <p>
-          David Ofoeyeno Special School<br>
-          Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive,<br>
-          Dsc Township Orhuwhorun, Behind Challenge Academy,<br>
-          Near Warri, Delta State, Nigeria
-        </p>
-        <p>
-          <a href="tel:+2348162144476">Phone: +2348162144476</a><br>
-          <a href="mailto:ofoeyenoautismschool@yahoo.com">Email: ofoeyenoautismschool@yahoo.com</a><br>
-          <a href="https://web.facebook.com/p/Comrade-David-Ofoeyeno-School-For-Special-Children-100048106376007/" target="_blank" rel="noopener">Facebook</a>
-        </p>
+<%
+  const fbUrl = 'https://web.facebook.com/p/Comrade-David-Ofoeyeno-School-For-Special-Children-100048106376007/';
+  const phone = '+2348162144476';
+  const email = 'ofoeyenoautismschool@yahoo.com';
+%>
+<footer class="site-footer" id="contact">
+  <div class="container site-footer__grid">
+    <div class="site-footer__about">
+      <img src="/img/newlogo.jpg" alt="David Ofoeyeno Special School logo" width="56" height="53" loading="lazy">
+      <p>Specialised education and care for children with autism and neurological disorders in Warri, Delta State.</p>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Quick links</h2>
+      <ul class="site-footer__links">
+        <li><a href="/">Home</a></li>
+        <% categories.forEach((c) => { %>
+          <li><a href="<%= c.path %>"><%= c.navLabel %></a></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Contact us</h2>
+      <address class="site-footer__address">
+        Comrade David Ofoeyeno School,<br>
+        Oputu Lay-out off Port-Harcourt Drive,<br>
+        Dsc Township Orhuwhorun, Behind Challenge Academy,<br>
+        Near Warri, Delta State, Nigeria
       </address>
-    </div>
-    <div class="footer-socials-section">
-      <h4>Follow Us on Social Media!</h4>
-      <div class="footer-socials-container">
-        <div class="footer-social-item">
-          <a href="https://web.facebook.com/p/Comrade-David-Ofoeyeno-School-For-Special-Children-100048106376007/?_rdc=1&_rdr" target="_blank" rel="noopener">
-            <div class="footer-social-bg">Fb</div>
-            <div class="footer-social-name">Facebook</div>
+      <ul class="site-footer__contact">
+        <li>
+          <a href="tel:<%= phone %>">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+            <%= phone %>
           </a>
-        </div>
-        <div class="footer-social-item">
-          <a href="mailto:ofoeyenoautismschool@yahoo.com">
-            <div class="footer-social-bg">📧</div>
-            <div class="footer-social-name">Email</div>
+        </li>
+        <li>
+          <a href="mailto:<%= email %>">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+            <%= email %>
           </a>
-        </div>
-        <div class="footer-social-item">
-          <a href="tel:+2348162144476">
-            <div class="footer-social-bg">📞</div>
-            <div class="footer-social-name">Call Us</div>
+        </li>
+        <li>
+          <a href="<%= fbUrl %>" target="_blank" rel="noopener">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+            Follow us on Facebook
           </a>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="footer-copyright">
-    &copy; 2025 David Ofoeyeno School for Special Children with Autism and Neurological Disorders | All Rights Reserved | Web Design by Kelz
+
+  <div class="site-footer__copy">
+    <div class="container">
+      &copy; <%= new Date().getFullYear() %> David Ofoeyeno School for Special Children with Autism and Neurological Disorders. All rights reserved.
+    </div>
   </div>
-  <!-- Schema Markup for LocalBusiness -->
-  <script type="application/ld+json">
-  {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "David Ofoeyeno Special School",
-      "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive, Dsc Township Orhuwhorun, Behind Challenge Academy",
-          "addressLocality": "Warri",
-          "addressRegion": "Delta State",
-          "postalCode": "320242",
-          "addressCountry": "Nigeria"
-      },
-      "telephone": "+2348162144476",
-      "email": "ofoeyenoautismschool@yahoo.com",
-      "url": "https://davidofoeyenospecialschool.com",
-      "logo": "https://storage.googleapis.com/<%= bucketName %>/direct/newlogo.jpg",
-      "description": "David Ofoeyeno Special School in Warri, Delta State, provides specialized education and support for children with autism and neurological disorders."
-  }
-  </script>
+
+  <%- include('jsonld', { data: {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'David Ofoeyeno Special School',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Comrade David Ofoeyeno School, Oputu Lay-out off Port-Harcourt Drive, Dsc Township Orhuwhorun, Behind Challenge Academy',
+      addressLocality: 'Warri',
+      addressRegion: 'Delta State',
+      postalCode: '320242',
+      addressCountry: 'Nigeria'
+    },
+    telephone: phone,
+    email: email,
+    url: siteUrl,
+    logo: `${siteUrl}/img/newlogo.jpg`,
+    description: 'David Ofoeyeno Special School in Warri, Delta State, provides specialized education and support for children with autism and neurological disorders.'
+  } }) %>
 </footer>

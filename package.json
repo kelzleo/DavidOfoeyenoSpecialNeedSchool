@@ -1,7 +1,7 @@
 {
   "name": "brand-new-drake",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
@@ -12,18 +12,18 @@
   "dependencies": {
     "@google-cloud/storage": "^7.16.0",
     "bcrypt": "^5.1.1",
+    "compression": "^1.8.2",
     "connect-flash": "^0.1.1",
     "dompurify": "^3.1.7",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
-    "gridfs-stream": "^1.1.1",
+    "helmet": "^8.3.0",
     "jsdom": "^25.0.1",
     "marked": "^15.0.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.13.7",
-    "muller": "^1.1.0",
     "multer": "^1.4.2",
     "multer-gridfs-storage": "^5.0.2",
     "nodemon": "^3.1.7",

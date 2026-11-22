@@ -2,42 +2,30 @@
 const express = require('express');
 const router = express.Router();
 const Article = require('../models/adb');
+const categories = require('../config/categories');
 
 router.get('/', async (req, res) => {
+  let sections;
   try {
-    // Retrieve the latest posts for each category (limit to 4)
-    const activityPosts = await Article.find({ category: 'Activity' })
-      .sort({ createdAt: -1 })
-      .limit(4);
-    const aboutPosts = await Article.find({ category: 'About' })
-      .sort({ createdAt: -1 })
-      .limit(4);
-    const academicsPosts = await Article.find({ category: 'Academics' })
-      .sort({ createdAt: -1 })
-      .limit(4);
-    const autismPosts = await Article.find({ category: 'Autism' })
-      .sort({ createdAt: -1 })
-      .limit(4);
-    
-    res.render('index', { 
-      title: 'Home Page', 
-      activityPosts,
-      aboutPosts,
-      academicsPosts,
-      autismPosts,
-      user: req.user
-    });
+    // Latest 3 posts for each section
+    sections = await Promise.all(
+      categories.map(async (cfg) => ({
+        cfg,
+        posts: await Article.find({ category: cfg.category }).sort({ createdAt: -1 }).limit(3),
+      }))
+    );
   } catch (err) {
     console.error('Error fetching posts:', err);
-    res.render('index', { 
-      title: 'Home Page', 
-      activityPosts: [],
-      aboutPosts: [],
-      academicsPosts: [],
-      autismPosts: [],
-      user: req.user 
-    });
+    sections = categories.map((cfg) => ({ cfg, posts: [] }));
   }
+
+  res.render('index', {
+    title: 'David Ofoeyeno Special School | Autism & Special Needs School in Warri, Delta State',
+    description: 'Comrade David Ofoeyeno Special School in Warri, Delta State, provides specialised education and care for children with autism and neurological disorders.',
+    active: 'home',
+    sections,
+    user: req.user,
+  });
 });
 
 module.exports = router;

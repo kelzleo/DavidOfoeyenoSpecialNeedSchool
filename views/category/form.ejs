@@ -1,0 +1,55 @@
+<%- include('../partials/top') %>
+
+<section class="section">
+  <div class="container container--narrow">
+    <h1 class="form-title"><%= article && article.id ? 'Edit' : 'New' %> <%= cfg.category %> post</h1>
+
+    <% if (locals.error) { %>
+      <p class="alert alert--error" role="alert"><%= error %></p>
+    <% } %>
+
+    <form
+      class="form"
+      action="<%= article && article.id ? `${cfg.path}/${article.id}?_method=PUT` : cfg.path %>"
+      method="POST"
+      enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input required type="text" name="title" id="title" class="form-control" value="<%= article && article.title ? article.title : '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" class="form-control" rows="3"><%= article && article.description ? article.description : '' %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="markdown">Content (Markdown)</label>
+        <textarea required name="markdown" id="markdown" class="form-control" rows="14"><%= article && article.markdown ? article.markdown : '' %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="sortOrder">Display order (optional)</label>
+        <input type="number" name="sortOrder" id="sortOrder" class="form-control" min="0" value="<%= article && article.sortOrder ? article.sortOrder : 0 %>">
+        <p class="form-hint">Lower numbers appear first. Leave at 0 to show the newest posts first.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image" class="form-control" accept="image/*" <%= article && article.id ? '' : 'required' %>>
+        <% if (article && article.imagePath) { %>
+          <p class="form-hint">Current image:</p>
+          <img class="form-preview" src="https://storage.googleapis.com/<%= bucketName %>/<%= article.imagePath %>" alt="Current image" width="200">
+        <% } %>
+      </div>
+
+      <div class="form-actions">
+        <a href="<%= cfg.path %>" class="btn btn--ghost">Cancel</a>
+        <button type="submit" class="btn btn--primary">Save</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('../partials/bottom') %>
